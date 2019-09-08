@@ -11,14 +11,17 @@ public class GolemController : MonoBehaviour
 	[SerializeField]
 	private float maxCloseDistance;
 	[SerializeField]
+	private float maxChasingRange;
+	[SerializeField]
 	private float attackCooldownTime;
 	private bool canAttack = true;
 
-	private readonly string PLAYER_TAG = "Player";
 	private GameObject player;
 
 	private bool isDead = false;
 	private bool animDeadPlayed= false;
+
+	private readonly string PLAYER_TAG = "Player";
 
 	#region
 	private readonly string IDLE_STATE_NAME = "Idle1";
@@ -52,21 +55,27 @@ public class GolemController : MonoBehaviour
 
 		if(!isDead) 
 		{
-			transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
-			Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-			if(Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME))) //Check if the distances between the object are bigger than the max close distance
+			//When the player is in range the boss go to follow him and try to attack him
+			if (Vector3.Distance(player.transform.position, transform.position) < maxChasingRange) 
 			{
-				transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
-				Walk(true);
-			} else //If the boss are the enough closer, can attack the enemy
+				transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+				Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME))) //Check if the distances between the object are bigger than the max close distance
+				{
+					transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
+					Walk(true);
+				} else //If the boss are the enough closer, can attack the enemy
+				{
+					Walk(false);
+					if (canAttack) {
+						canAttack = false;
+						Attack();
+						StartCoroutine(CooldownAttack());
+					}
+				}
+			} else//If the player isn't in vision range or chasing range the golem going to be in "Idle"  state 
 			{
 				Walk(false);
-				if(canAttack) 
-				{
-					canAttack = false;
-					Attack();
-					StartCoroutine(CooldownAttack());
-				}
 			}
 		} else 
 		{

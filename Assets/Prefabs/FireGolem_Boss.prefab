@@ -47,6 +47,7 @@ MonoBehaviour:
   animator: {fileID: 4467744649733995299}
   walkSpeed: 1
   maxCloseDistance: 2
+  maxChasingRange: 30
   attackCooldownTime: 2
 --- !u!1 &4562458769782329756
 GameObject:
