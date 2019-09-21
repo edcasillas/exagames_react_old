@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkByDefault: 1
-  canCrouch: 0
+  canCrouch: 1
   canJump: 1
   character: {fileID: 994067835120796722}
   interactionSystem: {fileID: 994067835120796720}
