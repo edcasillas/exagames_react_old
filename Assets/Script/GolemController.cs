@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,14 +56,14 @@ public class GolemController : MonoBehaviour
 	private readonly string WALKING_BOOL = "Walking";
 	#endregion
 	
-	void Start()
+	private void Start()
     {
 		life_FillImage.fillAmount = life;
 		UpdateLifeBar();
 		player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
     }
 	
-    void Update()
+    private void Update()
     {
 		if (life <= 0)
 			isDead = true;
@@ -108,6 +107,10 @@ public class GolemController : MonoBehaviour
 				animDeadPlayed = true;
 			}
 		}
+    }
+
+    private void OnParticleCollision(GameObject other) {
+	    Debug.Log("Particle collision");
     }
 
 	private void UpdateLifeBar() 
