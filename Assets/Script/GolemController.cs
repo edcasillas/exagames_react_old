@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,20 +57,20 @@ public class GolemController : MonoBehaviour
 
 	#region Animation Parameters
 	private readonly string DEATH_TRIGGER = "Death1";
-	private readonly string FIRE_ATTACK_TRIGGER = "Attack2";
+	private readonly string SPECIAL_ATTACK_TRIGGER = "Attack2";
 	private readonly string ATTACK_TRIGGER = "Attack3";
 	private readonly string GET_HIT_TRIGGER = "GetHit2";
 	private readonly string WALKING_BOOL = "Walking";
 	#endregion
 	
-	void Start()
+	private void Start()
     {
 		life_FillImage.fillAmount = life;
 		UpdateLifeBar();
 		player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
     }
 	
-    void Update()
+    private void Update()
     {
 		if (life <= 0)
 			isDead = true;
@@ -121,12 +120,12 @@ public class GolemController : MonoBehaviour
 		}
     }
 
-	private void UpdateLifeBar() 
+    private void UpdateLifeBar() 
 	{
 		life_FillImage.fillAmount = (life / maxLife);
 	}
 
-	public void SpawnProjectil() 
+	private void SpawnProjectil() 
 	{
 		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
 		//var projectileController = obj.GetComponent<BossProjectileController>();
@@ -135,29 +134,38 @@ public class GolemController : MonoBehaviour
 
 	public void GetDamage(float _damage) 
 	{
-		life -= _damage;
-		UpdateLifeBar();
-		animator.SetTrigger(GET_HIT_TRIGGER);
+		if(!isDead) 
+		{
+			life -= _damage;
+			UpdateLifeBar();
+			animator.SetTrigger(GET_HIT_TRIGGER);
+		}
 	}
 
-	public void Attack() 
+	private void Attack() 
 	{
 		Walk(false);
 		animator.SetTrigger(ATTACK_TRIGGER);
 	}
 
-	public void AttackWithFire() 
+	//TODO: Sentencia para que no deba moverse ni hacer nada hasta que termine el ataque especial
+	public void SpecialAttack() 
 	{
-		Walk(false);
-		animator.SetTrigger(FIRE_ATTACK_TRIGGER);
+		if(!isDead && canAttack) 
+		{
+			Walk(false);
+			SpawnProjectil();
+			StartCoroutine(CooldownAttack());
+			animator.SetTrigger(SPECIAL_ATTACK_TRIGGER);
+		}
 	}
 
-	public void Walk(bool isWalking) 
+	private void Walk(bool isWalking) 
 	{
 		animator.SetBool(WALKING_BOOL, isWalking);
 	}
 
-	public void Die() 
+	private void Die() 
 	{
 		Walk(false);
 		animator.SetTrigger(DEATH_TRIGGER);
@@ -167,9 +175,5 @@ public class GolemController : MonoBehaviour
 	{
 		yield return new WaitForSeconds(attackCooldownTime);
 		canAttack = true;
-	}
-
-	private void OnTriggerEnter(Collider other) {
-		
 	}
 }
