@@ -37,7 +37,9 @@ public class GolemController : MonoBehaviour
 
 	#region Shot / Special Ability
 	[SerializeField]
-	private GameObject shotPosition;
+	private GameObject startProjectilePosition;
+	[SerializeField]
+	private GameObject projectilePrefab;
 	#endregion
 
 	#region UI
@@ -79,6 +81,10 @@ public class GolemController : MonoBehaviour
 			GetDamage(10);
 		}
 
+		if(Input.GetKeyDown(KeyCode.F)) {
+			SpawnProjectil();
+		}
+
 		if(!isDead) 
 		{
 			//When the player is in range the boss go to follow him and try to attack him
@@ -118,6 +124,13 @@ public class GolemController : MonoBehaviour
 	private void UpdateLifeBar() 
 	{
 		life_FillImage.fillAmount = (life / maxLife);
+	}
+
+	public void SpawnProjectil() 
+	{
+		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
+		//var projectileController = obj.GetComponent<BossProjectileController>();
+		//projectileController.SetLocalRotation()
 	}
 
 	public void GetDamage(float _damage) 

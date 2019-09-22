@@ -258,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5304616060756418126}
   m_Layer: 0
-  m_Name: ShotPosition
+  m_Name: StartProjectilePosition
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -271,8 +271,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983590028947755800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.562, z: 0.62}
+  m_LocalRotation: {x: 0.00000006322027, y: 0.0000001490116, z: -0.000000105367114,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 1.5619999, z: 0.62000036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 896748899757359891}
@@ -333,6 +334,9 @@ MonoBehaviour:
   life: 200
   damage: 20
   cooldownGetDamage: 0
+  startProjectilePosition: {fileID: 983590028947755800}
+  projectilePrefab: {fileID: 4150317774107850607, guid: beb7a4c2fdb36574a8393a16c3314f45,
+    type: 3}
   life_FillImage: {fileID: 1634376551}
 --- !u!1 &4562458769782329756
 GameObject:
