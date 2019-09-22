@@ -120,11 +120,7 @@ public class GolemController : MonoBehaviour
 		}
     }
 
-    private void OnParticleCollision(GameObject other) {
-	    Debug.Log("Particle collision");
-    }
-
-	private void UpdateLifeBar() 
+    private void UpdateLifeBar() 
 	{
 		life_FillImage.fillAmount = (life / maxLife);
 	}

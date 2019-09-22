@@ -1030,6 +1030,7 @@ GameObject:
   - component: {fileID: 4566414629967094601}
   - component: {fileID: 4467744649733995299}
   - component: {fileID: 4562869442878133323}
+  - component: {fileID: 4390843293804131256}
   m_Layer: 0
   m_Name: FireGolem_Boss
   m_TagString: Untagged
@@ -1088,6 +1089,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.4067016, z: 1.359667}
   m_Center: {x: 1.279033e-18, y: 1.2068846, z: -0.003996253}
+--- !u!114 &4390843293804131256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562869442878133321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b6a18466178da44dacf17af3756a43d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4562869442883708517
 GameObject:
   m_ObjectHideFlags: 0
