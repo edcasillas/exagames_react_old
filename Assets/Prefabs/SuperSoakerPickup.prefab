@@ -536,6 +536,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2230596670102772630}
   - component: {fileID: 7895539134294790547}
+  - component: {fileID: 1267712079}
+  - component: {fileID: 1267712080}
   m_Layer: 0
   m_Name: SuperSoakerPickup
   m_TagString: Untagged
@@ -550,7 +552,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937854948043335138}
-  m_LocalRotation: {x: 0.49575412, y: 0.5042102, z: 0.5042082, w: -0.49575606}
+  m_LocalRotation: {x: -0.49575418, y: -0.5042101, z: -0.5042101, w: 0.49575418}
   m_LocalPosition: {x: 49, y: 20.7, z: 75.6}
   m_LocalScale: {x: 0.6748067, y: 0.6748067, z: 0.6748067}
   m_Children:
@@ -559,7 +561,7 @@ Transform:
   - {fileID: 4752491542912196011}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.969}
 --- !u!114 &7895539134294790547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +575,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotationAmount: {x: 0, y: 50, z: 0}
+--- !u!65 &1267712079
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937854948043335138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 2.11, z: 1}
+  m_Center: {x: 0, y: -0.27, z: 0.39}
+--- !u!114 &1267712080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937854948043335138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339d484fe6cda5649a1349bbb60e9009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8627762133765592803
 GameObject:
   m_ObjectHideFlags: 0
