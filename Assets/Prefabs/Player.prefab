@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac1b722283298b419e85b55d535c15b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gun: {fileID: 484418820938287306}
 --- !u!1001 &4570215853990501190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,6 +143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167425334645101452, guid: ddb742c2df8157648987c42244a7194d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4167425334645101455, guid: ddb742c2df8157648987c42244a7194d,
         type: 3}
@@ -200,6 +206,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddb742c2df8157648987c42244a7194d, type: 3}
+--- !u!1 &484418820938287306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4167425334645101452, guid: ddb742c2df8157648987c42244a7194d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4570215853990501190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &484418820938287305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4167425334645101455, guid: ddb742c2df8157648987c42244a7194d,
