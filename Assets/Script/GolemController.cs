@@ -75,11 +75,6 @@ public class GolemController : MonoBehaviour
 		if (life <= 0)
 			isDead = true;
 
-		if(Input.GetKeyDown(KeyCode.R)) 
-		{
-			GetDamage(10);
-		}
-
 		if(Input.GetKeyDown(KeyCode.F)) {
 			SpawnProjectil();
 		}
@@ -134,6 +129,8 @@ public class GolemController : MonoBehaviour
 
 	public void GetDamage(float _damage) 
 	{
+		if(isDead)
+			return;
 		life -= _damage;
 		UpdateLifeBar();
 		animator.SetTrigger(GET_HIT_TRIGGER);
