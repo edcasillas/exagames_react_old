@@ -35,7 +35,12 @@ public class GolemController : MonoBehaviour
 	private float cooldownGetDamage;//Me quede aqui jeje, falta implementarlo
 	#endregion
 
-	#region
+	#region Shot / Special Ability
+	[SerializeField]
+	private GameObject shotPosition;
+	#endregion
+
+	#region UI
 	[SerializeField]
 	private Image life_FillImage;
 	#endregion
