@@ -212,7 +212,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985316695}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.1041832, y: 1, z: 1.591846}
@@ -1029,8 +1029,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4566414629967094601}
   - component: {fileID: 4467744649733995299}
-  - component: {fileID: 4562869442878133322}
   - component: {fileID: 4562869442878133323}
+  - component: {fileID: 4562869442878133322}
+  - component: {fileID: 7254153011149896223}
   m_Layer: 0
   m_Name: FireGolem_Boss
   m_TagString: Untagged
@@ -1076,6 +1077,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &4562869442878133323
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562869442878133321}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.4067016, z: 1.359667}
+  m_Center: {x: 1.279033e-18, y: 1.2068846, z: -0.003996253}
 --- !u!54 &4562869442878133322
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1092,7 +1106,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4562869442878133323
+--- !u!65 &7254153011149896223
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
