@@ -643,7 +643,7 @@ PrefabInstance:
     - target: {fileID: 2999219167140191203, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 896748899757359891, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
@@ -715,7 +715,7 @@ PrefabInstance:
         type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 4150317774107850607, guid: beb7a4c2fdb36574a8393a16c3314f45,
+      objectReference: {fileID: 7828990167402915817, guid: e5d3080fa1fe0be48a64a9b8549cb979,
         type: 3}
     - target: {fileID: 1341547522, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
       propertyPath: m_LocalPosition.z
