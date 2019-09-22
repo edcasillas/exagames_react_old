@@ -26,6 +26,8 @@ public class GolemController : MonoBehaviour
 
 	#region Boss Stats
 	[SerializeField]
+	private float maxLife;
+	[SerializeField]
 	private float life;
 	[SerializeField]
 	private float damage;
@@ -57,6 +59,7 @@ public class GolemController : MonoBehaviour
 	
 	void Start()
     {
+
 		life_FillImage.fillAmount = life;
 		player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
     }
@@ -66,7 +69,10 @@ public class GolemController : MonoBehaviour
 		if (life <= 0)
 			isDead = true;
 
-
+		if(Input.GetKeyDown(KeyCode.R)) 
+		{
+			GetDamage(10);
+		}
 
 		if(Input.GetKeyDown(KeyCode.M)) 
 		{
@@ -108,6 +114,11 @@ public class GolemController : MonoBehaviour
 			}
 		}
     }
+
+	private void UpdateLifeBar() 
+	{
+		life_FillImage
+	}
 
 	public void GetDamage(float _damage) 
 	{
