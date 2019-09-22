@@ -34,7 +34,14 @@ public class GolemController : MonoBehaviour
 	private float cooldownGetDamage;//Me quede aqui jeje, falta implementarlo
 	#endregion
 
-	#region
+	#region Shot / Special Ability
+	[SerializeField]
+	private GameObject startProjectilePosition;
+	[SerializeField]
+	private GameObject projectilePrefab;
+	#endregion
+
+	#region UI
 	[SerializeField]
 	private Image life_FillImage;
 	#endregion
@@ -71,6 +78,10 @@ public class GolemController : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.R)) 
 		{
 			GetDamage(10);
+		}
+
+		if(Input.GetKeyDown(KeyCode.F)) {
+			SpawnProjectil();
 		}
 
 		if(!isDead) 
@@ -116,6 +127,13 @@ public class GolemController : MonoBehaviour
 	private void UpdateLifeBar() 
 	{
 		life_FillImage.fillAmount = (life / maxLife);
+	}
+
+	public void SpawnProjectil() 
+	{
+		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
+		//var projectileController = obj.GetComponent<BossProjectileController>();
+		//projectileController.SetLocalRotation()
 	}
 
 	public void GetDamage(float _damage) 
