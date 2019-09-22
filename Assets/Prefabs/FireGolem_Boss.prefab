@@ -298,6 +298,7 @@ MonoBehaviour:
   maxCloseDistance: 2
   maxChasingRange: 30
   attackCooldownTime: 2
+  maxLife: 200
   life: 200
   damage: 20
   cooldownGetDamage: 0

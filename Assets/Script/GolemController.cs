@@ -59,8 +59,8 @@ public class GolemController : MonoBehaviour
 	
 	void Start()
     {
-
 		life_FillImage.fillAmount = life;
+		UpdateLifeBar();
 		player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
     }
 	
@@ -70,11 +70,6 @@ public class GolemController : MonoBehaviour
 			isDead = true;
 
 		if(Input.GetKeyDown(KeyCode.R)) 
-		{
-			GetDamage(10);
-		}
-
-		if(Input.GetKeyDown(KeyCode.M)) 
 		{
 			GetDamage(10);
 		}
@@ -117,13 +112,13 @@ public class GolemController : MonoBehaviour
 
 	private void UpdateLifeBar() 
 	{
-		life_FillImage
+		life_FillImage.fillAmount = (life / maxLife);
 	}
 
 	public void GetDamage(float _damage) 
 	{
 		life -= _damage;
-		life_FillImage.fillAmount = life;
+		UpdateLifeBar();
 		animator.SetTrigger(GET_HIT_TRIGGER);
 	}
 
