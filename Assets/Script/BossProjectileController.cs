@@ -15,15 +15,6 @@ public class BossProjectileController : MonoBehaviour
 		addForce();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.R)) 
-		{
-			addForce();
-		}
-    }
-
 	public void SetLocalRotation(Quaternion _newRotation) 
 	{
 		transform.localRotation = _newRotation;
@@ -34,4 +25,6 @@ public class BossProjectileController : MonoBehaviour
 		Vector3 pos = new Vector3(0, 0, -transform.localPosition.z);
 		rb.AddRelativeForce(pos * projectileForce, ForceMode.Impulse);
 	}
+
+	//TODO: Make damage to the player in a trigger or collision enter
 }
