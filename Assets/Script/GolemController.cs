@@ -169,7 +169,11 @@ public class GolemController : MonoBehaviour
 		canAttack = true;
 	}
 
-	private void OnTriggerEnter(Collider other) {
-		
+	private void OnTriggerEnter(Collider other) 
+	{
+		if(other.gameObject.tag == PLAYER_TAG) 
+		{
+			Debug.Log("Entro jeje");
+		}
 	}
 }
