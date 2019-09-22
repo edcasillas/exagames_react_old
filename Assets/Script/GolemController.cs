@@ -171,4 +171,8 @@ public class GolemController : MonoBehaviour
 		yield return new WaitForSeconds(attackCooldownTime);
 		canAttack = true;
 	}
+
+	private void OnTriggerEnter(Collider other) {
+		
+	}
 }
