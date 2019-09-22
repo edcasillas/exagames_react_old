@@ -1115,6 +1115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6a18466178da44dacf17af3756a43d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Golem: {fileID: 2999219167140191204}
 --- !u!1 &4562869442883708517
 GameObject:
   m_ObjectHideFlags: 0
