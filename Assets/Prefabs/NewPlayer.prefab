@@ -447,10 +447,10 @@ GameObject:
   - component: {fileID: 994067835120796727}
   - component: {fileID: 994067835120796720}
   - component: {fileID: 994067835120796723}
-  - component: {fileID: 994067835120796722}
   - component: {fileID: 994067835120796725}
   - component: {fileID: 994067835120796724}
   - component: {fileID: 739479892}
+  - component: {fileID: 746117677}
   m_Layer: 0
   m_Name: Character Controller
   m_TagString: Player
@@ -498,7 +498,7 @@ MonoBehaviour:
   camRaycastDistance: 1
   fullBody: {fileID: 739479892}
   lookAt:
-    ik: {fileID: 994067835409649578}
+    ik: {fileID: 0}
     lerpSpeed: 5
     weightSpeed: 1.5
     isPaused: 0
@@ -517,61 +517,10 @@ MonoBehaviour:
   walkByDefault: 1
   canCrouch: 1
   canJump: 1
-  character: {fileID: 994067835120796722}
+  character: {fileID: 746117677}
   interactionSystem: {fileID: 994067835120796720}
   disableInputInInteraction: 1
   enableInputAtProgress: 0.8
---- !u!114 &994067835120796722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994067835120796726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f8cb876d2c742a9a5d9bfa03990ada, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravityTarget: {fileID: 0}
-  gravityMultiplier: 2
-  airborneThreshold: 0.6
-  slopeStartAngle: 50
-  slopeEndAngle: 85
-  spherecastRadius: 0.1
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  characterAnimation: {fileID: 994067835409649581}
-  userControl: {fileID: 994067835120796723}
-  cam: {fileID: 994067834164270633}
-  moveMode: 0
-  smoothPhysics: 1
-  smoothAccelerationTime: 0.2
-  linearAccelerationSpeed: 3
-  platformFriction: 7
-  groundStickyEffect: 4
-  maxVerticalVelocityOnGround: 3
-  velocityToGroundTangentWeight: 0
-  lookInCameraDirection: 0
-  turnSpeed: 5
-  stationaryTurnSpeedMlp: 1
-  airSpeed: 6
-  airControl: 3
-  jumpPower: 6.5
-  jumpRepeatDelayTime: 0
-  doubleJumpEnabled: 0
-  doubleJumpPowerMlp: 1
-  wallRunLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  wallRunMaxLength: 1
-  wallRunMinMoveMag: 0.6
-  wallRunMinVelocityY: -1
-  wallRunRotationSpeed: 1.5
-  wallRunMaxRotationAngle: 70
-  wallRunWeightSpeed: 5
-  crouchCapsuleScaleMlp: 0.6
 --- !u!54 &994067835120796725
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1060,6 +1009,59 @@ MonoBehaviour:
     spineStiffness: 0.5
     pullBodyVertical: 0.5
     pullBodyHorizontal: 0
+--- !u!114 &746117677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994067835120796726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e943a571f4cd4d62afcc91bbe15152b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityTarget: {fileID: 0}
+  gravityMultiplier: 2
+  airborneThreshold: 0.6
+  slopeStartAngle: 50
+  slopeEndAngle: 85
+  spherecastRadius: 0.1
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  characterAnimation: {fileID: 994067835409649581}
+  userControl: {fileID: 994067835120796723}
+  cam: {fileID: 994067834164270633}
+  moveMode: 0
+  smoothPhysics: 1
+  smoothAccelerationTime: 0.2
+  linearAccelerationSpeed: 3
+  platformFriction: 7
+  groundStickyEffect: 4
+  maxVerticalVelocityOnGround: 3
+  velocityToGroundTangentWeight: 0
+  lookInCameraDirection: 0
+  turnSpeed: 5
+  stationaryTurnSpeedMlp: 1
+  airSpeed: 6
+  airControl: 3
+  jumpPower: 6
+  jumpRepeatDelayTime: 0
+  doubleJumpEnabled: 0
+  doubleJumpPowerMlp: 1
+  wallRunLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  wallRunMaxLength: 1
+  wallRunMinMoveMag: 0.6
+  wallRunMinVelocityY: -1
+  wallRunRotationSpeed: 1.5
+  wallRunMaxRotationAngle: 70
+  wallRunWeightSpeed: 5
+  crouchCapsuleScaleMlp: 0.6
+  AimLerpSpeed: 0.1
+  AimController: {fileID: 8637616180903206861}
 --- !u!1 &994067835356916601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,7 +1103,8 @@ GameObject:
   - component: {fileID: 994067835409649583}
   - component: {fileID: 994067835409649576}
   - component: {fileID: 994067835409649581}
-  - component: {fileID: 994067835409649578}
+  - component: {fileID: 2915812217807768214}
+  - component: {fileID: 8637616180903206861}
   m_Layer: 0
   m_Name: Animation Controller
   m_TagString: Player
@@ -1158,12 +1161,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothFollow: 1
   smoothFollowSpeed: 20
-  characterController: {fileID: 994067835120796722}
+  characterController: {fileID: 746117677}
   turnSensitivity: 0.2
   turnSpeed: 5
   runCycleLegOffset: 0.2
   animSpeedMultiplier: 1
---- !u!114 &994067835409649578
+--- !u!114 &2915812217807768214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1172,78 +1175,95 @@ MonoBehaviour:
   m_GameObject: {fileID: 994067835409649582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 776adaaacdc5c4e8ab0395120a6e972b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5013856973b27429d937d256dc082f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fixTransforms: 1
   solver:
-    IKPosition: {x: 52.802082, y: 21.368546, z: 79.30011}
-    IKPositionWeight: 0
+    IKPosition: {x: 45.92, y: 16.989498, z: 9.700003}
+    IKPositionWeight: 1
     root: {fileID: 994067835409649583}
     target: {fileID: 0}
-    spine:
+    tolerance: 0
+    maxIterations: 4
+    useRotationLimits: 1
+    XY: 0
+    bones:
+    - transform: {fileID: 3566266230454408856}
+      weight: 1
+      solverPosition: {x: 0, y: 0, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0, w: 0}
+      defaultLocalPosition: {x: -9.142761e-13, y: 0.08645574, z: -0.010085966}
+      defaultLocalRotation: {x: 8.248717e-17, y: 0.0000000016993461, z: -0.000000052881774,
+        w: 1}
+      length: 0
+      sqrMag: 0
+      axis: {x: 0, y: 0, z: 0}
     - transform: {fileID: 7949376585577126336}
-      weight: 0
+      weight: 0.412
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
       defaultLocalPosition: {x: -3.9652934e-12, y: 0.10114102, z: -0.014157509}
       defaultLocalRotation: {x: 3.8774097e-26, y: -4.263257e-14, z: 6.82121e-13, w: 1}
       length: 0
       sqrMag: 0
-      axis: {x: 0, y: -6.365185e-22, z: 1.0000001}
+      axis: {x: 0, y: 0, z: 0}
     - transform: {fileID: 1677257124998802740}
-      weight: 0
+      weight: 0.442
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
       defaultLocalPosition: {x: -7.327659e-12, y: 0.116034605, z: -0.016195888}
       defaultLocalRotation: {x: 0, y: 0, z: 5.65064e-37, w: 1}
       length: 0
       sqrMag: 0
-      axis: {x: 0, y: -6.365185e-22, z: 1.0000001}
-    head:
-      transform: {fileID: 5333803064046263059}
-      weight: 1
+      axis: {x: 0, y: 0, z: 0}
+    - transform: {fileID: 5333803064046263059}
+      weight: 0
       solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0, w: 1}
+      solverRotation: {x: 0, y: 0, z: 0, w: 0}
       defaultLocalPosition: {x: -1.1548132e-11, y: 0.13513003, z: 0.009269655}
       defaultLocalRotation: {x: -5.2041704e-18, y: 4.2632927e-14, z: 2.273737e-13,
         w: 1}
       length: 0
       sqrMag: 0
-      axis: {x: 0, y: -1.0408315e-17, z: 1.0000001}
-    eyes: []
-    bodyWeight: 0.15
-    headWeight: 0.7
-    eyesWeight: 1
+      axis: {x: 0, y: 0, z: 0}
+    transform: {fileID: 0}
+    axis: {x: 0, y: -1, z: 0}
+    poleAxis: {x: 0, y: 0, z: 1}
+    polePosition: {x: 48.92, y: 19.989498, z: 9.7}
+    poleWeight: 0
+    poleTarget: {fileID: 0}
     clampWeight: 0.5
-    clampWeightHead: 0.75
-    clampWeightEyes: 0.5
-    clampSmoothing: 1
-    spineWeightCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.92189544
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    spineTargetOffset: {x: 0, y: 0, z: 0}
+    clampSmoothing: 2
+--- !u!114 &8637616180903206861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994067835409649582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9df7d42e7cb1a54a8eb68e9e9f0dc68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ik: {fileID: 2915812217807768214}
+  weight: 1
+  target: {fileID: 0}
+  targetSwitchSmoothTime: 0.3
+  weightSmoothTime: 0.3
+  smoothTurnTowardsTarget: 1
+  maxRadiansDelta: 3
+  maxMagnitudeDelta: 3
+  slerpSpeed: 3
+  pivotOffsetFromRoot: {x: 0, y: 1, z: 0}
+  minDistance: 1
+  offset: {x: 0, y: 0, z: 0}
+  maxRootAngle: 45
+  turnToTarget: 0
+  turnToTargetTime: 0.2
+  useAnimatedAimDirection: 0
+  animatedAimDirection: {x: 0, y: 0, z: 1}
 --- !u!1 &1254908001799544302
 GameObject:
   m_ObjectHideFlags: 0

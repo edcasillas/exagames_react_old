@@ -189,6 +189,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
+--- !u!114 &746117677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 746117677, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5762814160776717596}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e943a571f4cd4d62afcc91bbe15152b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &775411058
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +448,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 48.059002, y: 71.212006, z: 43.815002}
+--- !u!4 &1871813229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4566414629863693703, guid: 8b5a584e0214d6541925238e05b4c73e,
+    type: 3}
+  m_PrefabInstance: {fileID: 360738050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &759131119199803284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,6 +590,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 2019264523, guid: bc868a4623b2a9846915ac3e928902fc, type: 3}
+      propertyPath: events.Array.data[0].unityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 746117677}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc868a4623b2a9846915ac3e928902fc, type: 3}
 --- !u!1001 &5762814160776717596
@@ -639,6 +661,16 @@ PrefabInstance:
     - target: {fileID: 994067834610910044, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637616180903206861, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1871813229}
+    - target: {fileID: 8637616180903206861, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
+        type: 3}
+      propertyPath: weight
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

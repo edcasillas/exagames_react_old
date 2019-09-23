@@ -71,7 +71,7 @@ namespace RootMotion.Demos {
 		public AnimState animState = new AnimState();
 
 		protected Vector3 moveDirection; // The current move direction of the character in Strafe move mode
-		private Animator animator;
+		protected Animator animator;
 		private Vector3 normal, platformVelocity, platformAngularVelocity;
 		private RaycastHit hit;
 		private float jumpLeg, jumpEndTime, forwardMlp, groundDistance, lastAirTime, stickyForce;
