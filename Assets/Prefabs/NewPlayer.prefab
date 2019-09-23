@@ -1234,7 +1234,7 @@ MonoBehaviour:
     poleWeight: 0
     poleTarget: {fileID: 0}
     clampWeight: 0.5
-    clampSmoothing: 2
+    clampSmoothing: 0
 --- !u!114 &8637616180903206861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ik: {fileID: 2915812217807768214}
-  weight: 1
+  weight: 0
   target: {fileID: 0}
   targetSwitchSmoothTime: 0.3
   weightSmoothTime: 0.3
@@ -1258,7 +1258,7 @@ MonoBehaviour:
   slerpSpeed: 3
   pivotOffsetFromRoot: {x: 0, y: 1, z: 0}
   minDistance: 1
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 3, z: 0}
   maxRootAngle: 45
   turnToTarget: 0
   turnToTargetTime: 0.2
