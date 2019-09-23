@@ -292,29 +292,10 @@ MonoBehaviour:
     show: 1
     characterPosition:
       use: 1
-      offset: {x: -0.46, y: -0.55}
+      offset: {x: 0, y: 0}
       angleOffset: 29
-      maxAngle: 36.6
+      maxAngle: 180
       radius: 1.02
-      orbit: 0
-      fixYAxis: 1
-    cameraPosition:
-      lookAtTarget: {fileID: 0}
-      direction: {x: -0, y: -0, z: -1}
-      maxDistance: 0.5
-      maxAngle: 45
-      fixYAxis: 0
-    interactions:
-    - interactionObject: {fileID: 2019264523}
-      effectors: 06000000
-  - name: 'RightHand: Grip'
-    show: 1
-    characterPosition:
-      use: 1
-      offset: {x: 0.49, y: -0.29}
-      angleOffset: -67
-      maxAngle: 33.8
-      radius: 0.77
       orbit: 0
       fixYAxis: 1
     cameraPosition:
@@ -1132,7 +1113,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -6030,7 +6011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a438ad31e0e5c264098dd7ef9e5d4f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationAmount: {x: 0, y: 10, z: 0}
+  RotationAmount: {x: 0, y: 50, z: 0}
 --- !u!114 &3076116544852350005
 MonoBehaviour:
   m_ObjectHideFlags: 0
