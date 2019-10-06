@@ -6,16 +6,28 @@ public class BossEntrance : MonoBehaviour
 {
 	[SerializeField]
 	private ParticleSystem fireFx;
+	#region Golem Logic
 	[SerializeField]
-	private GameObject golem;
-    // Start is called before the first frame update
-    void Start()
+	private GolemController golemController;
+	[SerializeField]
+	private PlayerController playerController;
+	#endregion
+	// Start is called before the first frame update
+	void Start()
     {
 		fireFx.Pause();
     }
 
-	private void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag== "Player") {
+	private void OnTriggerEnter(Collider other) 
+	{
+		playerController = other.gameObject.GetComponent<PlayerController>();
+		if(playerController) 
+		{
+			if(golemController) 
+			{
+				golemController.SetPlayer(playerController);
+			}
+
 			fireFx.Play();
 			StartCoroutine("SpawnGolem");
 		}
@@ -24,6 +36,6 @@ public class BossEntrance : MonoBehaviour
 	private IEnumerator SpawnGolem() {
 		yield return new WaitForSeconds(1);
 
-		golem.SetActive(true);
+		golemController.gameObject.SetActive(true);
 	}
 }
