@@ -1,7 +1,6 @@
 ﻿using RootMotion.Demos;
 using RootMotion.FinalIK;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PlayerController : CharacterThirdPerson {
 
