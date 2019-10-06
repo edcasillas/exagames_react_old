@@ -17,7 +17,7 @@ public class GolemController : MonoBehaviour {
 	private bool specialAttackTriggered;
 
 	[SerializeField]
-	private GameObject player;
+	private PlayerController player;
 
 	private bool isDead = false;
 	private bool animDeadPlayed= false;
@@ -66,7 +66,7 @@ public class GolemController : MonoBehaviour {
 
 	public  void SetPlayer(PlayerController _player) 
 	{
-		player = _player.gameObject;
+		player = _player;
 	}
 
 	public void SetSpecialAttackTriggered(bool _specialAttackTriggered) 
@@ -119,29 +119,6 @@ public class GolemController : MonoBehaviour {
 						Attack();
 					}
 				}
-
-				//Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-				//if ((Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME))) && !specialAttackTriggered) //Check if the distances between the object are bigger than the max close distance
-				//{
-				//	transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
-				//	Walk(true);
-				//} else //If the boss are the enough closer, can attack the enemy
-				//{
-				//	Walk(false);
-				//	if(specialAttackTriggered && canAttack) 
-				//	{
-				//		canAttack = false;
-				//		specialAttackTriggered = false;
-				//		Debug.Log("SpecialAttack! ");
-				//		SpecialAttack();
-				//	}else if (canAttack && Vector3.Distance(playerPos, transform.position) < maxCloseDistance) 
-				//	{
-				//		canAttack = false;
-				//		Debug.Log("Attack! ");
-				//		Attack();
-				//		StartCoroutine(CooldownAttack());
-				//	}
-				//}
 			} else//If the player isn't in vision range or chasing range the golem going to be in "Idle"  state 
 			{
 				Walk(false);
