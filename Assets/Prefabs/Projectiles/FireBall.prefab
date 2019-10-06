@@ -47167,4 +47167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4699224260538014273}
-  projectileForce: 50
+  projectileForce: 100

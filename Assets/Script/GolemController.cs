@@ -100,11 +100,11 @@ public class GolemController : MonoBehaviour {
 			//When the player is in range the boss go to follow him and try to attack him
 			if (Vector3.Distance(player.transform.position, transform.position) < maxChasingRange) 
 			{
-				transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 				Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && !specialAttackTriggered && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || 
-																																		animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME)))
+				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && 
+																							(animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME)))
 				{
+					transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 					transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
 					Walk(true);
 				}else if(canAttack) 
@@ -179,7 +179,6 @@ public class GolemController : MonoBehaviour {
 		StartCoroutine(CooldownAttack());
 	}
 
-	//TODO: Sentencia para que no deba moverse ni hacer nada hasta que termine el ataque especial
 	private void SpecialAttack() 
 	{
 		if(!isDead && canAttack) 
@@ -188,7 +187,6 @@ public class GolemController : MonoBehaviour {
 			specialAttackTriggered = false;
 			Walk(false);
 			animator.SetTrigger(SPECIAL_ATTACK_TRIGGER);
-			//SpawnProjectil();
 			StartCoroutine(SpawnProjectilWithDelay(1.5f));
 			StartCoroutine(CooldownAttack());
 		}
