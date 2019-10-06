@@ -2,8 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GolemController : MonoBehaviour
-{
+public class GolemController : MonoBehaviour {
 	[SerializeField]
 	private Animator animator;
 	[SerializeField]
@@ -15,7 +14,9 @@ public class GolemController : MonoBehaviour
 	[SerializeField]
 	private float attackCooldownTime;
 	private bool canAttack = true;
+	private bool specialAttackTriggered;
 
+	[SerializeField]
 	private GameObject player;
 
 	private bool isDead = false;
@@ -62,12 +63,22 @@ public class GolemController : MonoBehaviour
 	private readonly string GET_HIT_TRIGGER = "GetHit2";
 	private readonly string WALKING_BOOL = "Walking";
 	#endregion
+
+	public  void SetPlayer(PlayerController _player) 
+	{
+		player = _player.gameObject;
+	}
+
+	public void SetSpecialAttackTriggered(bool _specialAttackTriggered) 
+	{
+		specialAttackTriggered = _specialAttackTriggered;
+	}
 	
 	private void Start()
     {
 		life_FillImage.fillAmount = life;
 		UpdateLifeBar();
-		player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
+		//player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
     }
 	
     private void Update()
@@ -81,7 +92,7 @@ public class GolemController : MonoBehaviour
 		}
 
 		if(Input.GetKeyDown(KeyCode.F)) {
-			SpawnProjectil();
+			SetSpecialAttackTriggered(true);
 		}
 
 		if(!isDead) 
@@ -91,21 +102,46 @@ public class GolemController : MonoBehaviour
 			{
 				transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 				Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME))) //Check if the distances between the object are bigger than the max close distance
+				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && !specialAttackTriggered && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || 
+																																		animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME)))
 				{
 					transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
 					Walk(true);
-				} else //If the boss are the enough closer, can attack the enemy
+				}else if(canAttack) 
 				{
-					Walk(false);
-					if (canAttack && Vector3.Distance(playerPos, transform.position) < maxCloseDistance) 
+					if(specialAttackTriggered) 
 					{
-						canAttack = false;
+						Debug.Log("SpecialAttack! ");
+						SpecialAttack();
+					}else if(Vector3.Distance(playerPos, transform.position) < maxCloseDistance)
+					{
 						Debug.Log("Attack! ");
 						Attack();
-						StartCoroutine(CooldownAttack());
 					}
 				}
+
+				//Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+				//if ((Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME))) && !specialAttackTriggered) //Check if the distances between the object are bigger than the max close distance
+				//{
+				//	transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
+				//	Walk(true);
+				//} else //If the boss are the enough closer, can attack the enemy
+				//{
+				//	Walk(false);
+				//	if(specialAttackTriggered && canAttack) 
+				//	{
+				//		canAttack = false;
+				//		specialAttackTriggered = false;
+				//		Debug.Log("SpecialAttack! ");
+				//		SpecialAttack();
+				//	}else if (canAttack && Vector3.Distance(playerPos, transform.position) < maxCloseDistance) 
+				//	{
+				//		canAttack = false;
+				//		Debug.Log("Attack! ");
+				//		Attack();
+				//		StartCoroutine(CooldownAttack());
+				//	}
+				//}
 			} else//If the player isn't in vision range or chasing range the golem going to be in "Idle"  state 
 			{
 				Walk(false);
@@ -125,13 +161,6 @@ public class GolemController : MonoBehaviour
 		life_FillImage.fillAmount = (life / maxLife);
 	}
 
-	private void SpawnProjectil() 
-	{
-		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
-		//var projectileController = obj.GetComponent<BossProjectileController>();
-		//projectileController.SetLocalRotation()
-	}
-
 	public void GetDamage(float _damage) 
 	{
 		if(!isDead) 
@@ -144,19 +173,24 @@ public class GolemController : MonoBehaviour
 
 	private void Attack() 
 	{
+		canAttack = false;
 		Walk(false);
 		animator.SetTrigger(ATTACK_TRIGGER);
+		StartCoroutine(CooldownAttack());
 	}
 
 	//TODO: Sentencia para que no deba moverse ni hacer nada hasta que termine el ataque especial
-	public void SpecialAttack() 
+	private void SpecialAttack() 
 	{
 		if(!isDead && canAttack) 
 		{
+			canAttack = false;
+			specialAttackTriggered = false;
 			Walk(false);
-			SpawnProjectil();
-			StartCoroutine(CooldownAttack());
 			animator.SetTrigger(SPECIAL_ATTACK_TRIGGER);
+			//SpawnProjectil();
+			StartCoroutine(SpawnProjectilWithDelay(1.5f));
+			StartCoroutine(CooldownAttack());
 		}
 	}
 
@@ -169,6 +203,18 @@ public class GolemController : MonoBehaviour
 	{
 		Walk(false);
 		animator.SetTrigger(DEATH_TRIGGER);
+	}
+
+	private void SpawnProjectil() {
+		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
+		//var projectileController = obj.GetComponent<BossProjectileController>();
+		//projectileController.SetLocalRotation()
+	}
+
+	private IEnumerator SpawnProjectilWithDelay(float _timeToDelay) 
+	{
+		yield return new WaitForSeconds(_timeToDelay);
+		SpawnProjectil();
 	}
 
 	private IEnumerator CooldownAttack ()
