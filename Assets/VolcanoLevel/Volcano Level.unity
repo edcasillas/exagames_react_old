@@ -302,10 +302,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireGolem_Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 2999219167140191203, guid: 8b5a584e0214d6541925238e05b4c73e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 896748899757359891, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 48.92
+      value: 49.83
       objectReference: {fileID: 0}
     - target: {fileID: 896748899757359891, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
@@ -315,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 896748899757359891, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.7
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 896748899757359891, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
@@ -369,6 +374,12 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 3017061340477791053}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &420729213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2999219167140191203, guid: 8b5a584e0214d6541925238e05b4c73e,
+    type: 3}
+  m_PrefabInstance: {fileID: 360738050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &704484260
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireFx: {fileID: 385932166}
+  golem: {fileID: 420729213}
 --- !u!65 &704484262
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -647,6 +659,10 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
       propertyPath: m_MoveSpeed
       value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
+      propertyPath: far clip plane
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
@@ -1025,6 +1041,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 759131118855883218, guid: 520cebac7da724544bf626ef6e82ddc1,
+        type: 3}
+      propertyPath: m_MaterialType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 520cebac7da724544bf626ef6e82ddc1, type: 3}
 --- !u!1001 &3017061340477791053
@@ -1043,6 +1064,16 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.radius.value
       value: 15.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509996745741779209, guid: bdee025e5be13fb4a966b0603af8a4b5,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 4.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509996745741779209, guid: bdee025e5be13fb4a966b0603af8a4b5,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3017061339435641864, guid: bdee025e5be13fb4a966b0603af8a4b5,
         type: 3}
