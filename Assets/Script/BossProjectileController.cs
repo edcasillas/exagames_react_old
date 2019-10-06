@@ -24,6 +24,7 @@ public class BossProjectileController : MonoBehaviour
 	{
 		Vector3 pos = new Vector3(0, 0, -transform.localPosition.z);
 		rb.AddRelativeForce(pos * projectileForce, ForceMode.Impulse);
+		StartCoroutine(destroyProjectil());
 	}
 
 	private IEnumerator destroyProjectil() 
