@@ -353,7 +353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &896748899757359891
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +389,7 @@ MonoBehaviour:
   maxCloseDistance: 2
   maxChasingRange: 30
   attackCooldownTime: 2
+  player: {fileID: 0}
   maxLife: 200
   life: 200
   damage: 20
@@ -407,6 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4562458769782329755}
   - component: {fileID: 4562458769782329754}
+  - component: {fileID: 5064055833546306969}
   m_Layer: 0
   m_Name: HitboxRHand
   m_TagString: Untagged
@@ -441,6 +443,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6200263, y: 0.36965796, z: 0.5680945}
   m_Center: {x: 0.022338798, y: 0.0041548354, z: -0.0076722763}
+--- !u!114 &5064055833546306969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562458769782329756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29135d59b219047f59231e1528f8ff61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageToProvoke: 20
 --- !u!1 &4562869439682085775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1060,7 @@ GameObject:
   - component: {fileID: 4467744649733995299}
   - component: {fileID: 4562869442878133323}
   - component: {fileID: 4390843293804131256}
+  - component: {fileID: 7848216531280319728}
   m_Layer: 0
   m_Name: FireGolem_Boss
   m_TagString: Untagged
@@ -1116,6 +1132,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Golem: {fileID: 2999219167140191204}
+--- !u!114 &7848216531280319728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562869442878133321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29135d59b219047f59231e1528f8ff61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageToProvoke: 10
 --- !u!1 &4562869442883708517
 GameObject:
   m_ObjectHideFlags: 0
