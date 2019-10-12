@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(HealthBarController))]
 public class GolemController : MonoBehaviour {
 	[SerializeField]
 	private Animator animator;
@@ -16,6 +17,8 @@ public class GolemController : MonoBehaviour {
 	private bool canAttack = true;
 	private bool specialAttackTriggered;
 
+	private HealthBarController healthBarController;
+
 	[SerializeField]
 	private PlayerController player;
 
@@ -26,9 +29,17 @@ public class GolemController : MonoBehaviour {
 
 	#region Boss Stats
 	[SerializeField]
-	private float maxLife;
-	[SerializeField]
-	private float life;
+	private int maxLife;
+
+	private int _health;
+	public int Health {
+		get { return _health; }
+		private set {
+			_health = value;
+			healthBarController.UpdateBar(_health);
+		}
+	}
+
 	[SerializeField]
 	private float damage;
 	[SerializeField]
@@ -40,11 +51,6 @@ public class GolemController : MonoBehaviour {
 	private GameObject startProjectilePosition;
 	[SerializeField]
 	private GameObject projectilePrefab;
-	#endregion
-
-	#region UI
-	[SerializeField]
-	private Image life_FillImage;
 	#endregion
 
 	#region Animations state names
@@ -73,17 +79,15 @@ public class GolemController : MonoBehaviour {
 	{
 		specialAttackTriggered = _specialAttackTriggered;
 	}
-	
-	private void Start()
+
+	private void Awake() {
+		healthBarController = GetComponent<HealthBarController>();
+		Health = maxLife;
+	}
+
+	private void Update()
     {
-		life_FillImage.fillAmount = life;
-		UpdateLifeBar();
-		//player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
-    }
-	
-    private void Update()
-    {
-		if (life <= 0)
+		if (Health <= 0)
 			isDead = true;
 
 		if(Input.GetKeyDown(KeyCode.R)) 
@@ -132,18 +136,12 @@ public class GolemController : MonoBehaviour {
 			}
 		}
     }
-
-    private void UpdateLifeBar() 
-	{
-		life_FillImage.fillAmount = (life / maxLife);
-	}
-
-	public void GetDamage(float _damage) 
+    
+	public void GetDamage(int _damage) 
 	{
 		if(!isDead) 
 		{
-			life -= _damage;
-			UpdateLifeBar();
+			Health -= _damage;
 			animator.SetTrigger(GET_HIT_TRIGGER);
 		}
 	}

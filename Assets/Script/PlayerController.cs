@@ -1,7 +1,9 @@
 ﻿using RootMotion.Demos;
 using RootMotion.FinalIK;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(HealthBarController))]
 public class PlayerController : CharacterThirdPerson {
 
 	public enum AnimatorLayer {
@@ -15,12 +17,23 @@ public class PlayerController : CharacterThirdPerson {
 	public AimController AimController;
 
 	private GameObject equippedWeapon;
+	private HealthBarController healthBarController;
 
 	public int InitialHealth;
 
-	public int Health { get; private set; }
+	private int _health;
+	public int Health 
+	{ 
+		get { return _health; }
+		private set 
+		{
+			_health = value;
+			healthBarController.UpdateBar(_health);
+		}
+	}
 
 	private void Awake() {
+		healthBarController = GetComponent<HealthBarController>();
 		Health = InitialHealth;
 	}
 

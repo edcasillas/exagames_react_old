@@ -5019,6 +5019,7 @@ GameObject:
   - component: {fileID: 994067835120796724}
   - component: {fileID: 739479892}
   - component: {fileID: 746117677}
+  - component: {fileID: 8595243213981071117}
   m_Layer: 0
   m_Name: Character Controller
   m_TagString: Player
@@ -5632,6 +5633,27 @@ MonoBehaviour:
   AimLerpSpeed: 0.1
   AimController: {fileID: 8637616180903206861}
   InitialHealth: 100
+--- !u!114 &8595243213981071117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994067835120796726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5148ed5a5cf4b4507aca521d45cf107b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health_FillImage: {fileID: 0}
+  ColorTransitionSpeed: 0.8
+  HealthColors:
+  - ValueMoreThan: 0.7
+    Color: {r: 0.17768393, g: 0.8867924, b: 0.012548926, a: 1}
+  - ValueMoreThan: 0.3
+    Color: {r: 0.892217, g: 0.9150943, b: 0, a: 1}
+  - ValueMoreThan: 0
+    Color: {r: 0.9245283, g: 0, b: 0, a: 1}
 --- !u!1 &994067835356916601
 GameObject:
   m_ObjectHideFlags: 0
