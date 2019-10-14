@@ -8,7 +8,14 @@ public class PlayerController : CharacterThirdPerson {
 
 	public enum AnimatorLayer {
 		Base,
-		Aiming
+		Aiming,
+		Hurt
+	}
+
+	public enum AnimatorTriggers {
+		HeadHit,
+		BodyHit,
+		Death
 	}
 
 	[Header("Trejo Variables")]
@@ -18,6 +25,7 @@ public class PlayerController : CharacterThirdPerson {
 
 	private GameObject equippedWeapon;
 	private HealthBarController healthBarController;
+	private Rigidbody rigidbody;
 
 	public int InitialHealth;
 
@@ -34,6 +42,7 @@ public class PlayerController : CharacterThirdPerson {
 
 	private void Awake() {
 		healthBarController = GetComponent<HealthBarController>();
+		rigidbody = GetComponent<Rigidbody>();
 		Health = InitialHealth;
 	}
 
@@ -43,10 +52,18 @@ public class PlayerController : CharacterThirdPerson {
 	}
 
 	public void TakeDamage(int damage) {
+		if (Health <= 0)
+			return;
+
 		Health -= damage;
 
 		if (Health <= 0) {
-			// is dead!
+			rigidbody.velocity = Vector3.zero;
+			rigidbody.angularVelocity = Vector3.zero;
+			animator.SetTrigger(AnimatorTriggers.Death.ToString());
+			enabled = false;
+		} else {
+			animator.SetTrigger(((AnimatorTriggers)Random.Range(0, 2)).ToString());
 		}
 	}
 

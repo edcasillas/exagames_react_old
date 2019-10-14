@@ -102,7 +102,7 @@ public class GolemController : MonoBehaviour {
 		if(!isDead) 
 		{
 			//When the player is in range the boss go to follow him and try to attack him
-			if (Vector3.Distance(player.transform.position, transform.position) < maxChasingRange) 
+			if (player.Health > 0 && Vector3.Distance(player.transform.position, transform.position) < maxChasingRange) 
 			{
 				Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
 				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && 

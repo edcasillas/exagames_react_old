@@ -42,6 +42,8 @@ namespace RootMotion.FinalIK {
 		/// </summary>
 		public float applyAngularVelocity = 1f;
 
+		public GameObject BasedObject;
+
 		/// <summary>
 		/// Switches to ragdoll.
 		/// </summary>
@@ -192,8 +194,11 @@ namespace RootMotion.FinalIK {
 
 			if (ik != null) ik.GetIKSolver().OnPostUpdate += AfterLastIK;
 
+			if (!BasedObject)
+				BasedObject = gameObject;
+
 			// Gather all the rigidbodies and their associates
-			Rigidbody[] rigidbodies = (Rigidbody[])GetComponentsInChildren<Rigidbody>();
+			Rigidbody[] rigidbodies = (Rigidbody[])BasedObject.GetComponentsInChildren<Rigidbody>();
 			int firstIndex = rigidbodies[0].gameObject == gameObject? 1: 0;
 
 			rigidbones = new Rigidbone[firstIndex == 0? rigidbodies.Length: rigidbodies.Length - 1];
