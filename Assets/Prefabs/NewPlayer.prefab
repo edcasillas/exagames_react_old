@@ -5646,7 +5646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health_FillImage: {fileID: 0}
-  ColorTransitionSpeed: 0.8
+  ColorTransitionSpeed: 1
   HealthColors:
   - ValueMoreThan: 0.7
     Color: {r: 0.17768393, g: 0.8867924, b: 0.012548926, a: 1}

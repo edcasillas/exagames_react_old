@@ -20,6 +20,7 @@ public class HealthBarController : MonoBehaviour
 	private bool initialized = false;
 
 	private int initHealth;
+	private float currentFillAmountValue;
 
 	public void UpdateBar(int newHealth) {
 		if (!initialized) {
@@ -27,11 +28,16 @@ public class HealthBarController : MonoBehaviour
 			initialized = true;
 		}
 
-		Health_FillImage.fillAmount = (float)newHealth / (float)initHealth;
+		currentFillAmountValue = (float)newHealth / (float)initHealth;
 	}
 
 	private void Update()
     {
+		if (!Health_FillImage)
+			return;
+
+		Health_FillImage.fillAmount = Mathf.Lerp(Health_FillImage.fillAmount, currentFillAmountValue, Time.deltaTime * ColorTransitionSpeed);
+
 		if (!HealthColors.Any())
 			return;
 
