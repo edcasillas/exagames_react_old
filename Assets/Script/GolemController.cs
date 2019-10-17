@@ -2,8 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GolemController : MonoBehaviour
-{
+[RequireComponent(typeof(HealthBarController))]
+public class GolemController : MonoBehaviour {
 	[SerializeField]
 	private Animator animator;
 	[SerializeField]
@@ -15,8 +15,12 @@ public class GolemController : MonoBehaviour
 	[SerializeField]
 	private float attackCooldownTime;
 	private bool canAttack = true;
+	private bool specialAttackTriggered;
 
-	private GameObject player;
+	private HealthBarController healthBarController;
+
+	[SerializeField]
+	private PlayerController player;
 
 	private bool isDead = false;
 	private bool animDeadPlayed= false;
@@ -25,9 +29,17 @@ public class GolemController : MonoBehaviour
 
 	#region Boss Stats
 	[SerializeField]
-	private float maxLife;
-	[SerializeField]
-	private float life;
+	private int maxLife;
+
+	private int _health;
+	public int Health {
+		get { return _health; }
+		private set {
+			_health = value;
+			healthBarController.UpdateBar(_health);
+		}
+	}
+
 	[SerializeField]
 	private float damage;
 	[SerializeField]
@@ -39,11 +51,6 @@ public class GolemController : MonoBehaviour
 	private GameObject startProjectilePosition;
 	[SerializeField]
 	private GameObject projectilePrefab;
-	#endregion
-
-	#region UI
-	[SerializeField]
-	private Image life_FillImage;
 	#endregion
 
 	#region Animations state names
@@ -62,17 +69,25 @@ public class GolemController : MonoBehaviour
 	private readonly string GET_HIT_TRIGGER = "GetHit2";
 	private readonly string WALKING_BOOL = "Walking";
 	#endregion
-	
-	private void Start()
+
+	public  void SetPlayer(PlayerController _player) 
+	{
+		player = _player;
+	}
+
+	public void SetSpecialAttackTriggered(bool _specialAttackTriggered) 
+	{
+		specialAttackTriggered = _specialAttackTriggered;
+	}
+
+	private void Awake() {
+		healthBarController = GetComponent<HealthBarController>();
+		Health = maxLife;
+	}
+
+	private void Update()
     {
-		life_FillImage.fillAmount = life;
-		UpdateLifeBar();
-		player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
-    }
-	
-    private void Update()
-    {
-		if (life <= 0)
+		if (Health <= 0)
 			isDead = true;
 
 		if(Input.GetKeyDown(KeyCode.R)) 
@@ -81,29 +96,31 @@ public class GolemController : MonoBehaviour
 		}
 
 		if(Input.GetKeyDown(KeyCode.F)) {
-			SpawnProjectil();
+			SetSpecialAttackTriggered(true);
 		}
 
 		if(!isDead) 
 		{
 			//When the player is in range the boss go to follow him and try to attack him
-			if (Vector3.Distance(player.transform.position, transform.position) < maxChasingRange) 
+			if (player.Health > 0 && Vector3.Distance(player.transform.position, transform.position) < maxChasingRange) 
 			{
-				transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 				Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME))) //Check if the distances between the object are bigger than the max close distance
+				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && 
+																							(animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME)))
 				{
+					transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 					transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
 					Walk(true);
-				} else //If the boss are the enough closer, can attack the enemy
+				}else if(canAttack) 
 				{
-					Walk(false);
-					if (canAttack && Vector3.Distance(playerPos, transform.position) < maxCloseDistance) 
+					if(specialAttackTriggered) 
 					{
-						canAttack = false;
+						Debug.Log("SpecialAttack! ");
+						SpecialAttack();
+					}else if(Vector3.Distance(playerPos, transform.position) < maxCloseDistance)
+					{
 						Debug.Log("Attack! ");
 						Attack();
-						StartCoroutine(CooldownAttack());
 					}
 				}
 			} else//If the player isn't in vision range or chasing range the golem going to be in "Idle"  state 
@@ -119,44 +136,34 @@ public class GolemController : MonoBehaviour
 			}
 		}
     }
-
-    private void UpdateLifeBar() 
-	{
-		life_FillImage.fillAmount = (life / maxLife);
-	}
-
-	private void SpawnProjectil() 
-	{
-		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
-		//var projectileController = obj.GetComponent<BossProjectileController>();
-		//projectileController.SetLocalRotation()
-	}
-
-	public void GetDamage(float _damage) 
+    
+	public void GetDamage(int _damage) 
 	{
 		if(!isDead) 
 		{
-			life -= _damage;
-			UpdateLifeBar();
+			Health -= _damage;
 			animator.SetTrigger(GET_HIT_TRIGGER);
 		}
 	}
 
 	private void Attack() 
 	{
+		canAttack = false;
 		Walk(false);
 		animator.SetTrigger(ATTACK_TRIGGER);
+		StartCoroutine(CooldownAttack());
 	}
 
-	//TODO: Sentencia para que no deba moverse ni hacer nada hasta que termine el ataque especial
-	public void SpecialAttack() 
+	private void SpecialAttack() 
 	{
 		if(!isDead && canAttack) 
 		{
+			canAttack = false;
+			specialAttackTriggered = false;
 			Walk(false);
-			SpawnProjectil();
-			StartCoroutine(CooldownAttack());
 			animator.SetTrigger(SPECIAL_ATTACK_TRIGGER);
+			StartCoroutine(SpawnProjectilWithDelay(1.5f));
+			StartCoroutine(CooldownAttack());
 		}
 	}
 
@@ -169,6 +176,18 @@ public class GolemController : MonoBehaviour
 	{
 		Walk(false);
 		animator.SetTrigger(DEATH_TRIGGER);
+	}
+
+	private void SpawnProjectil() {
+		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
+		//var projectileController = obj.GetComponent<BossProjectileController>();
+		//projectileController.SetLocalRotation()
+	}
+
+	private IEnumerator SpawnProjectilWithDelay(float _timeToDelay) 
+	{
+		yield return new WaitForSeconds(_timeToDelay);
+		SpawnProjectil();
 	}
 
 	private IEnumerator CooldownAttack ()

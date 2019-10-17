@@ -15,15 +15,26 @@ public class BossProjectileController : MonoBehaviour
 		addForce();
     }
 
-	public void SetLocalRotation(Quaternion _newRotation) 
-	{
-		transform.localRotation = _newRotation;
-	}
+	//public void SetLocalRotation(Quaternion _newRotation) 
+	//{
+	//	transform.localRotation = _newRotation;
+	//}
 
 	private void addForce() 
 	{
-		Vector3 pos = new Vector3(0, 0, -transform.localPosition.z);
+		Vector3 pos = new Vector3(0, 0, transform.localPosition.z);
 		rb.AddRelativeForce(pos * projectileForce, ForceMode.Impulse);
+		StartCoroutine(destroyProjectil());
+	}
+
+	private IEnumerator destroyProjectil() 
+	{
+		yield return new WaitForSeconds(5);
+		Destroy(gameObject);
+	}
+
+	private void OnCollisionEnter(Collision collision) {
+		Debug.Log("Collision object: " + collision.gameObject.name);
 	}
 
 	//TODO: Make damage to the player in a trigger or collision enter
