@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour {
 	public ParticleSystem Particles;
 
 	public float WaterLevel = 100;
 	public float ConsumeSpeed = 20f;
+	public Image WaterLevelFillImage;
 
 	private bool isRecovering;
 
@@ -30,5 +32,7 @@ public class Gun : MonoBehaviour {
 				Particles.Stop();
 			}
 		}
+
+		WaterLevelFillImage.fillAmount = WaterLevel / 100f;
 	}
 }
