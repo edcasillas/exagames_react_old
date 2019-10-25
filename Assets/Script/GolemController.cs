@@ -14,6 +14,8 @@ public class GolemController : MonoBehaviour {
 	private float maxChasingRange;
 	[SerializeField]
 	private float attackCooldownTime;
+
+	[SerializeField] private GameObject _winCanvas;
 	private bool canAttack = true;
 	private bool specialAttackTriggered;
 
@@ -176,6 +178,7 @@ public class GolemController : MonoBehaviour {
 	{
 		Walk(false);
 		animator.SetTrigger(DEATH_TRIGGER);
+		_winCanvas.SetActive(true);
 	}
 
 	private void SpawnProjectil() {

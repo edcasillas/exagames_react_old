@@ -390,6 +390,7 @@ MonoBehaviour:
   maxCloseDistance: 2
   maxChasingRange: 30
   attackCooldownTime: 2
+  _winCanvas: {fileID: 0}
   player: {fileID: 0}
   maxLife: 200
   damage: 20
