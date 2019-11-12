@@ -350,6 +350,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2999219167140191204, guid: 8b5a584e0214d6541925238e05b4c73e,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 791499617}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
 --- !u!198 &385932166 stripped
@@ -580,6 +585,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e943a571f4cd4d62afcc91bbe15152b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &999684090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 908496643978992163, guid: bc868a4623b2a9846915ac3e928902fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3938318509456320571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &999684094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999684090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6e02b1774c44978a1c7d8b8b799fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageToProvoke: 5
 --- !u!1001 &1085618844
 PrefabInstance:
   m_ObjectHideFlags: 0

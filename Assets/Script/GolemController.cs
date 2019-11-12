@@ -15,6 +15,7 @@ public class GolemController : MonoBehaviour {
 	[SerializeField]
 	private float attackCooldownTime;
 	private bool canAttack = true;
+	private bool gettingDamage = false;
 	private bool specialAttackTriggered;
 
 	private HealthBarController healthBarController;
@@ -43,7 +44,7 @@ public class GolemController : MonoBehaviour {
 	[SerializeField]
 	private float damage;
 	[SerializeField]
-	private float cooldownGetDamage;//Me quede aqui jeje, falta implementarlo
+	private float cooldownGetDamage;
 	#endregion
 
 	#region Shot / Special Ability
@@ -106,12 +107,13 @@ public class GolemController : MonoBehaviour {
 			{
 				Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
 				if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && 
-																							(animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME)))
+																							(animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME))
+																							&& !animator.GetCurrentAnimatorStateInfo(0).IsName(GET_HIT_STATE_NAME))
 				{
 					transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 					transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
 					Walk(true);
-				}else if(canAttack) 
+				}else if(canAttack && !animator.GetCurrentAnimatorStateInfo(0).IsName(GET_HIT_STATE_NAME)) 
 				{
 					if(specialAttackTriggered) 
 					{
@@ -139,24 +141,37 @@ public class GolemController : MonoBehaviour {
     
 	public void GetDamage(int _damage) 
 	{
-		if(!isDead) 
+		if(!gettingDamage)
 		{
+			gettingDamage = true;
+			StartCoroutine(GetDamageWithCoroutine(_damage));
+		}
+	}
+
+	private IEnumerator GetDamageWithCoroutine(int _damage)
+	{
+		yield return new WaitForSeconds(cooldownGetDamage);
+		if (!isDead) {
 			Health -= _damage;
 			animator.SetTrigger(GET_HIT_TRIGGER);
 		}
+		gettingDamage = false;
 	}
 
 	private void Attack() 
 	{
-		canAttack = false;
-		Walk(false);
-		animator.SetTrigger(ATTACK_TRIGGER);
-		StartCoroutine(CooldownAttack());
+		if(!gettingDamage)
+		{
+			canAttack = false;
+			Walk(false);
+			animator.SetTrigger(ATTACK_TRIGGER);
+			StartCoroutine(CooldownAttack());
+		}
 	}
 
 	private void SpecialAttack() 
 	{
-		if(!isDead && canAttack) 
+		if(!isDead && canAttack && !gettingDamage) 
 		{
 			canAttack = false;
 			specialAttackTriggered = false;
@@ -180,8 +195,6 @@ public class GolemController : MonoBehaviour {
 
 	private void SpawnProjectil() {
 		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
-		//var projectileController = obj.GetComponent<BossProjectileController>();
-		//projectileController.SetLocalRotation()
 	}
 
 	private IEnumerator SpawnProjectilWithDelay(float _timeToDelay) 
