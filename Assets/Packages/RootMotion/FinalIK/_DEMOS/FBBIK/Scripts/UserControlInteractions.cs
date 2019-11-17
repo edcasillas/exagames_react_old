@@ -14,6 +14,8 @@ namespace RootMotion.Demos {
 		[SerializeField] bool disableInputInInteraction = true; // If true, will keep the character stopped while an interaction is in progress
 		public float enableInputAtProgress = 0.8f; // The normalized interaction progress after which the character is able to move again
 
+
+		[SerializeField] PlayerSounds playerSounds;
 		protected override void Update() {
             // Disable input when in interaction
             if (disableInputInInteraction && interactionSystem != null && (interactionSystem.inInteraction || interactionSystem.IsPaused())) {
@@ -63,6 +65,7 @@ namespace RootMotion.Demos {
 			GUILayout.Label("Press E to start interaction");
 
 			if (Input.GetKey(KeyCode.E)) {
+				playerSounds.PlayPickUpWeaponSound();
 				interactionSystem.TriggerInteraction(closestTriggerIndex, false);
 			}
 		}

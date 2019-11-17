@@ -14,6 +14,10 @@ public class PlayerSounds : MonoBehaviour
 	private AudioClip takingDamage;
 	[SerializeField]
 	private AudioClip jump;
+	[SerializeField]
+	private AudioClip death;
+	[SerializeField]
+	private AudioClip pickUpWeapon;
 
 	private void Start() {
 		aS = GetComponent<AudioSource>();
@@ -36,5 +40,11 @@ public class PlayerSounds : MonoBehaviour
 	}
 	public void PlayJumpSound() {
 		aS.PlayOneShot(jump);
+	}
+	public void PlayDeathSound() {
+		aS.PlayOneShot(death);
+	}
+	public void PlayPickUpWeaponSound() {
+		aS.PlayOneShot(pickUpWeapon);
 	}
 }
