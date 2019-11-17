@@ -284,6 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d23579bc8515d4d8443b3a56060c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playButton: {fileID: 0}
+  _sceneName: 0
 --- !u!4 &224976168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 994067835356916598, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
@@ -362,6 +364,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2999219167140191204, guid: 8b5a584e0214d6541925238e05b4c73e,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 791499617}
     - target: {fileID: 1341547522, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -374,12 +381,18 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 3017061340477791053}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &420729213 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2999219167140191203, guid: 8b5a584e0214d6541925238e05b4c73e,
+--- !u!114 &420729215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2999219167140191204, guid: 8b5a584e0214d6541925238e05b4c73e,
     type: 3}
   m_PrefabInstance: {fileID: 360738050}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9676ed2b7edbd444298c1ac2af02dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &704484260
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +426,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireFx: {fileID: 385932166}
-  golem: {fileID: 420729213}
+  fireRingExplosionSound: {fileID: 0}
+  fireRingExplosionClip: {fileID: 8300000, guid: ac7e5581dcb60f74fa3eb81b90aed579,
+    type: 3}
+  golemController: {fileID: 420729215}
+  playerController: {fileID: 791499617}
 --- !u!65 &704484262
 BoxCollider:
   m_ObjectHideFlags: 0
