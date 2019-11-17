@@ -6,6 +6,10 @@ public class BossEntrance : MonoBehaviour
 {
 	[SerializeField]
 	private ParticleSystem fireFx;
+	[SerializeField]
+	private AudioSource fireRingExplosionSound;
+	[SerializeField]
+	private AudioClip fireRingExplosionClip;
 	#region Golem Logic
 	[SerializeField]
 	private GolemController golemController;
@@ -29,6 +33,7 @@ public class BossEntrance : MonoBehaviour
 			}
 
 			fireFx.Play();
+			fireRingExplosionSound.PlayOneShot(fireRingExplosionClip);
 			StartCoroutine("SpawnGolem");
 		}
 	}
