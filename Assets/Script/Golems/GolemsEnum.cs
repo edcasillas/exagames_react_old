@@ -4,8 +4,9 @@
 	{
 		Idle,
 		Walking,
-		Atacking,
-		SpecialAtacking,
+		Attacking,
+		SpecialAttacking,
+		TakingDamage,
 		Dying
 	}
 }

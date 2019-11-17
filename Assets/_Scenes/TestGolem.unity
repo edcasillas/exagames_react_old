@@ -572,6 +572,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireGolem_Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 2999219167140191203, guid: 8b5a584e0214d6541925238e05b4c73e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 896748899757359891, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -631,7 +636,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1892261741}
+      objectReference: {fileID: 0}
     - target: {fileID: 1341547522, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
