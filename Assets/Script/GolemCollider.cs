@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 public class GolemCollider : MonoBehaviour {
-	public GolemController Golem;
+	[SerializeField]
+	private _GolemController golemController;
 
 	private void OnParticleCollision(GameObject other) {
 		var col = other.GetComponent<PlayerDamagerObject>();
@@ -11,7 +12,7 @@ public class GolemCollider : MonoBehaviour {
 
 		if(golemDamagerObj)
 		{
-			Golem.GetDamage(golemDamagerObj.DamageToProvoke);
+			golemController.TakeDamage(golemDamagerObj.DamageToProvoke);
 			//golemDamagerObj.DamageToProvoke();
 		}
 

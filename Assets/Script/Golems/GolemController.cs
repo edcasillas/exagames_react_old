@@ -37,8 +37,8 @@ public abstract class _GolemController : MonoBehaviour
 	private bool isDead = false;
 	private bool animDeadPlayed = false;
 	
-	[SerializeField]
-	private Rigidbody rb;
+	//[SerializeField]
+	//private Rigidbody rb;
 	[SerializeField]
 	private BoxCollider collision;
 
@@ -86,16 +86,20 @@ public abstract class _GolemController : MonoBehaviour
 	private readonly string WALKING_BOOL = "Walking";
 	#endregion
 
+	[SerializeField]
 	private GolemStates lastState = GolemStates.Idle;
+	[SerializeField]
 	private GolemStates actualState = GolemStates.Idle;
 
-	void Awake()
+	protected void Awake()
     {
 		healthBarController = GetComponent<HealthBarController>();
 		Health = maxLife;
 	}
 
-    void Update()
+	//private
+
+    protected void Update()
     {
 		if (Health <= 0)
 			isDead = true;

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class FireGolemController : _GolemController
 {
-    // Start is called before the first frame update
-    void Start()
+	private void Awake() {
+		base.Awake();
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -13,6 +17,6 @@ public class FireGolemController : _GolemController
     // Update is called once per frame
     void Update()
     {
-        
+		base.Update();
     }
 }
