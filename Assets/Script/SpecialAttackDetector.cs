@@ -13,13 +13,13 @@ public class SpecialAttackDetector : MonoBehaviour
 		var isPlayer = other.gameObject.GetComponent<PlayerController>();
 		if(isPlayer) 
 		{
-			Debug.Log("Special Attacks");
+			//Debug.Log("Special Attacks");
 			golemController.SetSpecialAttackTriggered(true);
 		}
 		//For debug only
-		if (other.gameObject.tag == PLAYER_TAG) {
-			Debug.Log("Entro jeje");
-			golemController.SetSpecialAttackTriggered(true);
-		}
+		//if (other.gameObject.tag == PLAYER_TAG) {
+		//	//Debug.Log("Entro jeje");
+		//	golemController.SetSpecialAttackTriggered(true);
+		//}
 	}
 }

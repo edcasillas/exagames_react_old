@@ -104,7 +104,7 @@ public abstract class _GolemController : MonoBehaviour
 		if (Health <= 0)
 			isDead = true;
 
-		if (isDead) {
+		if (!isDead) {
 			if (Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance && canAttack && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) {
 				if (specialAttackTriggered) 
 				{
@@ -114,7 +114,7 @@ public abstract class _GolemController : MonoBehaviour
 					if (Debug.isDebugBuild) Debug.Log("Attack");
 					Attack();
 				}
-			} else if (player.Health > 0 && IsChasing && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) 
+			} else if (player.Health > 0 && IsChasing && Vector3.Distance(player.transform.position, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) 
 			{
 				Walk();
 			}
@@ -175,19 +175,14 @@ public abstract class _GolemController : MonoBehaviour
 	protected void SetAnimationBool(string _boolName, bool _makingSomething) 
 	{
 		animator.SetBool(_boolName, _makingSomething);
-		Debug.Log("Lenght: " + animator.GetCurrentAnimatorStateInfo(0).length);
-		Debug.Log("Normalized Time: " + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 	}
 
 	public void Walk() {
 		Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-		if (Vector3.Distance(playerPos, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && (actualState == GolemStates.Walking || actualState == GolemStates.Idle)) 
-		{
-			ChangeState(GolemStates.Walking);
-			transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
-			transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
-			SetAnimationBool(WALK_STATE_NAME, true);
-		}
+		if(actualState != GolemStates.Walking) ChangeState(GolemStates.Walking);
+		transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+		transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
+		SetAnimationBool(WALKING_BOOL, true);
 	}
 
 	public void TakeDamage(int _damage) {
@@ -219,10 +214,25 @@ public abstract class _GolemController : MonoBehaviour
 		{
 			canAttack = false;
 			ChangeState(GolemStates.Attacking);
-			SetAnimationBool(WALK_STATE_NAME, false);
 			PlayAnimationWithTrigger(ATTACK_TRIGGER);
 			StartCoroutine(CooldownAttack());
+			StartCoroutine(ChangeStateWhenAnimationIsOver(NORMAL_ATTACK_STATE_NAME, GolemStates.Idle));
 		}
+	}
+
+	protected IEnumerator ChangeStateWhenAnimationIsOver(string _actualAnimationName, GolemStates _golemState) 
+	{
+		while (!animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
+		{
+			yield return null;
+			Debug.Log("Starting selected animation state");
+		}
+		Debug.Log("Checking animation name: " + _actualAnimationName);
+		while(animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
+		{
+			yield return null;
+		}
+		ChangeState(_golemState);
 	}
 
 	protected IEnumerator CooldownAttack() {
