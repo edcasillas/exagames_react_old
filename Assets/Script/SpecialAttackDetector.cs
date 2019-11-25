@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpecialAttackDetector : MonoBehaviour
 {
 	[SerializeField]
-	private GolemController golemController;
+	private _GolemController golemController;
 	private readonly string PLAYER_TAG = "Player";
 
 	private void OnTriggerEnter(Collider other) 
@@ -14,7 +14,7 @@ public class SpecialAttackDetector : MonoBehaviour
 		if(isPlayer) 
 		{
 			//Debug.Log("Special Attacks");
-			golemController.SetSpecialAttackTriggered(true);
+			golemController.TriggerSpecialAttack();
 		}
 		//For debug only
 		//if (other.gameObject.tag == PLAYER_TAG) {

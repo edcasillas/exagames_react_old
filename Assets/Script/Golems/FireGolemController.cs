@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class FireGolemController : _GolemController
 {
+	#region Shot / Special Ability
+	[SerializeField]
+	private GameObject startProjectilePosition;
+	[SerializeField]
+	private GameObject projectilePrefab;
+	#endregion
+
 	private void Awake() {
 		base.Awake();
 	}
@@ -19,4 +26,9 @@ public class FireGolemController : _GolemController
     {
 		base.Update();
     }
+
+	public override void TriggerSpecialAttack() 
+	{
+
+	}
 }

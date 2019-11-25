@@ -61,13 +61,6 @@ public abstract class _GolemController : MonoBehaviour
 	private float cooldownGetDamage;
 	#endregion
 
-	#region Shot / Special Ability
-	[SerializeField]
-	private GameObject startProjectilePosition;
-	[SerializeField]
-	private GameObject projectilePrefab;
-	#endregion
-
 	//Esta parte seguramente se daba poner en el script del golem y no en el padre
 	#region Animations state names
 	private readonly string IDLE_STATE_NAME = "Idle1";
@@ -106,10 +99,10 @@ public abstract class _GolemController : MonoBehaviour
 
 		if (!isDead) {
 			if (Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance && canAttack && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) {
-				if (specialAttackTriggered) 
+				if (specialAttackTriggered && canAttack) 
 				{
 					TriggerSpecialAttack();
-				} else 
+				} else if(canAttack)
 				{
 					if (Debug.isDebugBuild) Debug.Log("Attack");
 					Attack();
@@ -142,10 +135,7 @@ public abstract class _GolemController : MonoBehaviour
 		actualState = _newState;
 	}
 
-	protected void TriggerSpecialAttack()//Esto lo debe de desarrolar el golem hijo de esta clase
-	{
-
-	}
+	public abstract void TriggerSpecialAttack();//Esto lo debe de desarrolar el golem hijo de esta clase
 
 	/// <summary>
 	/// Used to play animations with a animator trigger
