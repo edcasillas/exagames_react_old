@@ -33,9 +33,9 @@ public class BossProjectileController : MonoBehaviour
 		Destroy(gameObject);
 	}
 
-	private void OnCollisionEnter(Collision collision) {
-		Debug.Log("Collision object: " + collision.gameObject.name);
-	}
+	//private void OnCollisionEnter(Collision collision) {
+	//	Debug.Log("Collision object: " + collision.gameObject.name);
+	//}
 
 	//TODO: Make damage to the player in a trigger or collision enter
 }

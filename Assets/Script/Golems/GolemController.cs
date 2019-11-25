@@ -7,21 +7,21 @@ using GolemsEnums;
 public abstract class _GolemController : MonoBehaviour
 {
 	[SerializeField]
-	private Animator animator;
+	protected Animator animator;
 	[SerializeField]
-	private float walkSpeed;
+	protected float walkSpeed;
 	[SerializeField]
-	private float maxCloseDistance;
+	protected float maxCloseDistance;
 	[SerializeField]
-	private float maxChasingRange;
+	protected float maxChasingRange;
 	[SerializeField]
-	private float attackCooldownTime;
-	private bool canAttack = true;
-	private bool takingDamage = false;
-	private bool specialAttackTriggered;
+	protected float attackCooldownTime;
+	protected bool canAttack = true;
+	protected bool takingDamage = false;
+	protected bool specialAttackTriggered;
 
-	private bool isChasing = false;
-	private bool IsChasing 
+	protected bool isChasing = false;
+	protected bool IsChasing 
 	{
 		get 
 		{
@@ -29,24 +29,24 @@ public abstract class _GolemController : MonoBehaviour
 		}
 	}
 
-	private HealthBarController healthBarController;
+	protected HealthBarController healthBarController;
 
 	[SerializeField]
-	private PlayerController player;
+	protected PlayerController player;
 
-	private bool isDead = false;
-	private bool animDeadPlayed = false;
+	protected bool isDead = false;
+	protected bool animDeadPlayed = false;
 	
 	//[SerializeField]
 	//private Rigidbody rb;
 	[SerializeField]
-	private BoxCollider collision;
+	protected BoxCollider collision;
 
 	#region Boss Stats
 	[SerializeField]
-	private int maxLife;
+	protected int maxLife;
 
-	private int _health;
+	protected int _health;
 	public int Health {
 		get { return _health; }
 		private set {
@@ -63,26 +63,26 @@ public abstract class _GolemController : MonoBehaviour
 
 	//Esta parte seguramente se daba poner en el script del golem y no en el padre
 	#region Animations state names
-	private readonly string IDLE_STATE_NAME = "Idle1";
-	private readonly string WALK_STATE_NAME = "Walk";
-	private readonly string DEATH_STATE_NAME = "Death1";
-	private readonly string TAKE_DAMAGE_STATE_NAME = "GetHit2";
-	private readonly string NORMAL_ATTACK_STATE_NAME = "Attack3";
-	private readonly string FIRE_ATTACK_STATE_NAME = "Attack2";
+	protected readonly string IDLE_STATE_NAME = "Idle1";
+	protected readonly string WALK_STATE_NAME = "Walk";
+	protected readonly string DEATH_STATE_NAME = "Death1";
+	protected readonly string TAKE_DAMAGE_STATE_NAME = "GetHit2";
+	protected readonly string NORMAL_ATTACK_STATE_NAME = "Attack3";
+	protected readonly string SPECIAL_ATTACK_STATE_NAME = "Attack2";
 	#endregion
-	
+
 	#region Animation Parameters
-	private readonly string DEATH_TRIGGER = "Death1";
-	private readonly string SPECIAL_ATTACK_TRIGGER = "Attack2";
-	private readonly string ATTACK_TRIGGER = "Attack3";
-	private readonly string TAKE_DAMAGE_TRIGGER = "GetHit2";
-	private readonly string WALKING_BOOL = "Walking";
+	protected readonly string DEATH_TRIGGER = "Death1";
+	protected readonly string SPECIAL_ATTACK_TRIGGER = "Attack2";
+	protected readonly string ATTACK_TRIGGER = "Attack3";
+	protected readonly string TAKE_DAMAGE_TRIGGER = "GetHit2";
+	protected readonly string WALKING_BOOL = "Walking";
 	#endregion
 
 	[SerializeField]
-	private GolemStates lastState = GolemStates.Idle;
+	protected GolemStates lastState = GolemStates.Idle;
 	[SerializeField]
-	private GolemStates actualState = GolemStates.Idle;
+	protected GolemStates actualState = GolemStates.Idle;
 
 	protected void Awake()
     {
@@ -210,19 +210,19 @@ public abstract class _GolemController : MonoBehaviour
 		}
 	}
 
-	protected IEnumerator ChangeStateWhenAnimationIsOver(string _actualAnimationName, GolemStates _golemState) 
+	protected IEnumerator ChangeStateWhenAnimationIsOver(string _actualAnimationName, GolemStates _stateToChange) 
 	{
 		while (!animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
 		{
 			yield return null;
-			Debug.Log("Starting selected animation state");
+			//Debug.Log("Starting selected animation state");
 		}
-		Debug.Log("Checking animation name: " + _actualAnimationName);
+		//Debug.Log("Checking animation name: " + _actualAnimationName);
 		while(animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
 		{
 			yield return null;
 		}
-		ChangeState(_golemState);
+		ChangeState(_stateToChange);
 	}
 
 	protected IEnumerator CooldownAttack() {

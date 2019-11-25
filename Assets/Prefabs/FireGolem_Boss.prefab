@@ -230,8 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc3c29ebbf12314090ad009e5da0bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  golemController: {fileID: 2999219167140191204, guid: 8b5a584e0214d6541925238e05b4c73e,
-    type: 3}
+  golemController: {fileID: 7623049499512972670}
 --- !u!1 &1991006557
 GameObject:
   m_ObjectHideFlags: 0
