@@ -185,16 +185,13 @@ public abstract class _GolemController : MonoBehaviour
 	}
 
 	protected IEnumerator TakeDamageWithCoroutine(int _damage) {
-		yield return new WaitForSeconds(cooldownGetDamage);
-		if (!isDead) {
+		if (!isDead) 
+		{
 			Health -= _damage;
 			PlayAnimationWithTrigger(TAKE_DAMAGE_TRIGGER);
-			while(animator.GetCurrentAnimatorStateInfo(0).IsName(TAKE_DAMAGE_STATE_NAME))
-			{
-				yield return null;
-			}
+			yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 		}
-
+		yield return new WaitForSeconds(cooldownGetDamage);
 		takingDamage = false;
 		ChangeState(GolemStates.Idle);
 	}

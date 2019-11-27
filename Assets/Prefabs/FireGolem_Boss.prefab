@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6a18466178da44dacf17af3756a43d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  golemController: {fileID: 0}
+  golemController: {fileID: 7623049499512972670}
 --- !u!114 &7848216531280319728
 MonoBehaviour:
   m_ObjectHideFlags: 0
