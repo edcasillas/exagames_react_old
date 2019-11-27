@@ -12,7 +12,7 @@ public class BossEntrance : MonoBehaviour
 	private AudioClip fireRingExplosionClip;
 	#region Golem Logic
 	[SerializeField]
-	private _GolemController golemController;
+	private GolemController golemController;
 	[SerializeField]
 	private PlayerController playerController;
 	#endregion

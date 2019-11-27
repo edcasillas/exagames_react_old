@@ -4,7 +4,7 @@ using UnityEngine;
 using GolemsEnums;
 
 [RequireComponent(typeof(HealthBarController))]
-public abstract class _GolemController : MonoBehaviour
+public abstract class GolemController : MonoBehaviour
 {
 	[SerializeField]
 	protected Animator animator;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GolemsEnums;
 
-public class FireGolemController : _GolemController
+public class FireGolemController : GolemController
 {
 	#region Shot / Special Ability
 	[SerializeField]

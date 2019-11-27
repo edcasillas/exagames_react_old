@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpecialAttackDetector : MonoBehaviour
 {
 	[SerializeField]
-	private _GolemController golemController;
+	private GolemController golemController;
 	private readonly string PLAYER_TAG = "Player";
 
 	private void OnTriggerEnter(Collider other) 
