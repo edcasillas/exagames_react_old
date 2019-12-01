@@ -4835,7 +4835,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 48babfe3efdd28548a728d45e4b31485, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.669
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4844,7 +4844,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -5219,6 +5219,7 @@ MonoBehaviour:
   interactionSystem: {fileID: 994067835120796720}
   disableInputInInteraction: 1
   enableInputAtProgress: 0.8
+  playerSounds: {fileID: 700092506}
 --- !u!54 &994067835120796725
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5760,6 +5761,9 @@ MonoBehaviour:
   crouchCapsuleScaleMlp: 0.6
   AimLerpSpeed: 0.1
   AimController: {fileID: 8637616180903206861}
+  isAiming: 0
+  gameoverCanvas: {fileID: 0}
+  userControlInteractions: {fileID: 994067835120796723}
   InitialHealth: 100
 --- !u!114 &8595243213981071117
 MonoBehaviour:
@@ -5997,7 +6001,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.504
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6108,6 +6112,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 600ed7b3977243f4f85db362f2cab25d, type: 3}
   - {fileID: 8300000, guid: c4bc44d4a30563d4d96d3a42af835c0a, type: 3}
   - {fileID: 8300000, guid: 3df56ccf693b60b4992021a1ddab726e, type: 3}
+  takingDamage: {fileID: 8300000, guid: a835bef4d2df0f2459dd028c4968477b, type: 3}
+  jump: {fileID: 8300000, guid: e06f955f42877df45b31258ca735df08, type: 3}
+  death: {fileID: 8300000, guid: 95caaa627a147e2429b31b952b8952b4, type: 3}
+  pickUpWeapon: {fileID: 8300000, guid: 7d6306d9d5730164fa7717a08f141145, type: 3}
 --- !u!1 &1254908001799544302
 GameObject:
   m_ObjectHideFlags: 0
