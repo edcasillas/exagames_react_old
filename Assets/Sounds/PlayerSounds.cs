@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerSounds : MonoBehaviour
 {
-	[SerializeField]
-	private AudioSource aS;
 	[SerializeField]
 	private AudioClip[] playerRockFootsteps;
 	[SerializeField]
@@ -19,9 +15,11 @@ public class PlayerSounds : MonoBehaviour
 	[SerializeField]
 	private AudioClip pickUpWeapon;
 
-	private void Start() {
-		aS = GetComponent<AudioSource>();
-		if (!aS) {
+	private AudioSource audioSource;
+
+	private void Awake() {
+		audioSource = GetComponent<AudioSource>();
+		if (!audioSource) {
 			Debug.LogError("PlayerHasNoAudioSource");
 		}
 	}
@@ -29,22 +27,26 @@ public class PlayerSounds : MonoBehaviour
 	public void PlayPlayerStepSoundRock() 
 	{
 		int num = Random.Range(0, playerRockFootsteps.Length);
-		aS.PlayOneShot(playerRockFootsteps[num]);
+		audioSource.PlayOneShot(playerRockFootsteps[num]);
 	}
 	public void PlayPlayerWalkStepSoundRock() {
 		int num = Random.Range(0, playerRockWalkFootsteps.Length);
-		aS.PlayOneShot(playerRockWalkFootsteps[num]);
+		audioSource.PlayOneShot(playerRockWalkFootsteps[num]);
 	}
 	public void PlayTakingDamageSound() {
-		aS.PlayOneShot(takingDamage);
+		audioSource.PlayOneShot(takingDamage);
 	}
+
+	/// <summary>
+	/// Evento que se manda llamar desde HumanoidIdleJumpUp.fbx/HumanoidJumpUp y desde HumanoidJumpAndFall.fbx/HumanoidJumpForwardLeft y HumanoidJumpAndFall.fbx/HumanoidJumpForwardRight
+	/// </summary>
 	public void PlayJumpSound() {
-		aS.PlayOneShot(jump);
+		audioSource.PlayOneShot(jump);
 	}
 	public void PlayDeathSound() {
-		aS.PlayOneShot(death);
+		audioSource.PlayOneShot(death);
 	}
 	public void PlayPickUpWeaponSound() {
-		aS.PlayOneShot(pickUpWeapon);
+		audioSource.PlayOneShot(pickUpWeapon);
 	}
 }

@@ -1,7 +1,5 @@
-﻿namespace Enums
-{
-	public enum Scenes
-	{
+﻿namespace Enums {
+	public enum Scenes {
 		Volcano,
 		MainMenu
 	}
