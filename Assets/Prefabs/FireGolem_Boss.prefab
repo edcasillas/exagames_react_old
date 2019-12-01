@@ -5168,6 +5168,7 @@ MonoBehaviour:
   winCanvas: {fileID: 0}
   player: {fileID: 0}
   collision: {fileID: 4562869442878133323}
+  shield: {fileID: 8313460480483777337}
   maxLife: 200
   damage: 20
   cooldownGetDamage: 2
