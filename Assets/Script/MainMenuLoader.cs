@@ -6,8 +6,10 @@ using UnityEngine.Video;
 
 [RequireComponent(typeof(VideoPlayer))]
 public class MainMenuLoader : MonoBehaviour {
+	private AsyncOperation asyncLoad;
+
 	private IEnumerator Start() {
-		var asyncLoad = SceneManager.LoadSceneAsync(Scenes.MainMenu.ToString());
+		asyncLoad = SceneManager.LoadSceneAsync(Scenes.MainMenu.ToString());
 		asyncLoad.allowSceneActivation = false;
 
 		var videoPlayer = GetComponent<VideoPlayer>();
@@ -21,5 +23,9 @@ public class MainMenuLoader : MonoBehaviour {
 		while (!asyncLoad.isDone) {
 			yield return null;
 		}
+	}
+
+	private void Update() {
+		if (Input.anyKeyDown) asyncLoad.allowSceneActivation = true;
 	}
 }
