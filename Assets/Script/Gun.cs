@@ -15,20 +15,14 @@ public class Gun : MonoBehaviour {
 	[Header("Sound Variables")]
 	[SerializeField] GunSounds gS;
 
-	private void OnEnable() {
-		HudItem.SetActive(true);
-	}
-
+	private void OnEnable() => HudItem.SetActive(true);
 
 	private void Update() {
 		if (isRecovering) {
-
-			
-			if(!gS.GetAudioSource().isPlaying) {
-
-			gS.PlayReloadingSound();
+			if (!gS.GetAudioSource().isPlaying) {
+				gS.PlayReloadingSound();
 			}
-			
+
 			Particles.Stop();
 			WaterLevel += ConsumeSpeed * 2 * Time.deltaTime;
 			if (WaterLevel >= 100) {
