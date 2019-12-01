@@ -78,6 +78,9 @@ public class PlayerController : CharacterThirdPerson {
 	}
 
 	private void HandleAiming() {
+		if (Health <= 0)
+			return;
+
 		if (!AimController?.ik.solver.transform)
 			return;
 
@@ -101,8 +104,6 @@ public class PlayerController : CharacterThirdPerson {
 		}
 
 		animator.SetLayerWeight((int)AnimatorLayer.Aiming, newAimingLayerWeight);
-
-
 	}
 
 	public void OnWeaponPickedUp(GameObject weapon) {
