@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Scenes/LogoExaGames.unity
+    guid: 4ba4ebca5508f9e4e97ae45bbb0983b6
+  - enabled: 1
     path: Assets/_Scenes/MainMenu.unity
     guid: 7a4f4cdfcd27b314a892e8041a010df8
   - enabled: 1
