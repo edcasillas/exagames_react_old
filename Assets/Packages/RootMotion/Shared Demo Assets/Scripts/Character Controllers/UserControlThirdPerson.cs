@@ -17,6 +17,9 @@ namespace RootMotion.Demos {
 			public int actionIndex;
 		}
 
+		[SerializeField]
+		private bool runByDefault;
+
 		public bool walkByDefault;        // toggle for walking state
 		public bool canCrouch = true;
 		public bool canJump = true;
@@ -48,7 +51,7 @@ namespace RootMotion.Demos {
 				state.move = move;
 			} else state.move = Vector3.zero;
 
-			bool walkToggle = Input.GetKey(KeyCode.LeftShift);
+			bool walkToggle = runByDefault ? !Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.LeftShift);
 
 			// We select appropriate speed based on whether we're walking by default, and whether the walk/run toggle button is pressed:
 			float walkMultiplier = (walkByDefault ? walkToggle ? 1 : 0.5f : walkToggle ? 0.5f : 1);
