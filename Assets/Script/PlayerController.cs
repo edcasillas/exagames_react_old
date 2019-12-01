@@ -46,8 +46,6 @@ public class PlayerController : CharacterThirdPerson {
 	}
 
 	private void Awake() {
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
 		healthBarController = GetComponent<HealthBarController>();
 		rigidbody = GetComponent<Rigidbody>();
 		Health = InitialHealth;
