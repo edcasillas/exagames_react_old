@@ -22,6 +22,7 @@ public class PlayerController : CharacterThirdPerson {
 	[Space]
 	public float AimLerpSpeed = .1f;
 	public AimController AimController;
+	public bool isAiming;
 
 	private GameObject equippedWeapon;
 	private HealthBarController healthBarController;
@@ -81,11 +82,19 @@ public class PlayerController : CharacterThirdPerson {
 
 		if (newWeight == 0f) {
 			newAimingLayerWeight = animator.GetLayerWeight((int)AnimatorLayer.Aiming);
-			if (AimController.weight <= 0.05f)
+			if (AimController.weight <= 0.05f) {
 				newAimingLayerWeight = Mathf.Lerp(newAimingLayerWeight, newWeight, AimLerpSpeed * 1.2f);
+			}
+		}
+
+		if (newWeight >= 0.5) {
+			isAiming = true;
+		} else {
+			isAiming = false;
 		}
 
 		animator.SetLayerWeight((int)AnimatorLayer.Aiming, newAimingLayerWeight);
+
 
 	}
 

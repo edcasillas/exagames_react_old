@@ -9,9 +9,11 @@ public class Gun : MonoBehaviour {
 	public Image WaterLevelFillImage;
 
 	private bool isRecovering;
+	[SerializeField] PlayerController playerController;
 
 	[Header("Sound Variables")]
 	[SerializeField] GunSounds gS;
+
 
 	private void Update() {
 		if (isRecovering) {
@@ -32,7 +34,7 @@ public class Gun : MonoBehaviour {
 			}
 		} else {
 			var fire = Input.GetAxis("Fire1");
-			if (fire > 0f) {
+			if (fire > 0f && playerController.isAiming) {
 				WaterLevel -= ConsumeSpeed * Time.deltaTime;
 				if (WaterLevel > 0f) {
 					Particles.Play();
