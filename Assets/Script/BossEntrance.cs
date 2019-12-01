@@ -35,10 +35,14 @@ public class BossEntrance : MonoBehaviour
 			}
 
 			fireFx.Play();
-			fireRingTriggers.SetActive(true);
+			StartCoroutine("ActivateTriggers");
 			fireRingExplosionSound.PlayOneShot(fireRingExplosionClip);
 			StartCoroutine("SpawnGolem");
 		}
+	}
+	private IEnumerator ActivateTriggers() {
+		yield return new WaitForSeconds(.3f);
+		fireRingTriggers.SetActive(true);
 	}
 
 	private IEnumerator SpawnGolem() {
