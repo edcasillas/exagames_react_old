@@ -10,6 +10,10 @@ public class GolemSounds : MonoBehaviour
 	private AudioClip[] golemSteps;
 	[SerializeField]
 	private AudioClip golemMeleeAttack;
+	[SerializeField]
+	private AudioClip golemDeath;
+	[SerializeField]
+	private AudioClip golemFireball;
 
 	private void Start() {
 		aS = GetComponent<AudioSource>();
@@ -23,6 +27,12 @@ public class GolemSounds : MonoBehaviour
 	}
 	public void PlayGolemMeleeAtackSound() {
 		aS.PlayOneShot(golemMeleeAttack);
+	}
+	public void PlayGolemDeathSound() {
+		aS.PlayOneShot(golemDeath);
+	}
+	public void PlayGolemFireballSound() {
+		aS.PlayOneShot(golemFireball);
 	}
 
 }
