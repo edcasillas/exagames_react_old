@@ -23,4 +23,16 @@ public class PlayScene : MonoBehaviour {
 		SceneManager.LoadScene(sceneName.ToString());
 	}
 
+	public void PlayAgain() 
+	{
+		audioSource.PlayOneShot(buttonSound);
+		SceneManager.LoadScene(Scenes.Volcano.ToString());
+	}
+
+	public void GoToMainMenu() 
+	{
+		audioSource.PlayOneShot(buttonSound);
+		SceneManager.LoadScene(Scenes.MainMenu.ToString());
+	}
+
 }

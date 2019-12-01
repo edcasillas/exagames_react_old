@@ -2,6 +2,7 @@
 using RootMotion.FinalIK;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Cameras;
 
 [RequireComponent(typeof(HealthBarController))]
 public class PlayerController : CharacterThirdPerson {
@@ -27,7 +28,9 @@ public class PlayerController : CharacterThirdPerson {
 	private GameObject equippedWeapon;
 	private HealthBarController healthBarController;
 	private Rigidbody rigidbody;
-	[SerializeField] private GameObject gameoverCanvas; 
+	[SerializeField] private GameObject gameoverCanvas;
+	[SerializeField]
+	private FreeLookCam freeLookCam;
 
 	public int InitialHealth;
 
@@ -66,6 +69,10 @@ public class PlayerController : CharacterThirdPerson {
 			rigidbody.angularVelocity = Vector3.zero;
 			animator.SetTrigger(AnimatorTriggers.Death.ToString());
 			gameoverCanvas.SetActive(true);
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
+			freeLookCam.enabled = false;
+			Destroy(PauseManager.instance.gameObject);
 			enabled = false;
 		} else {
 			animator.SetTrigger(((AnimatorTriggers)Random.Range(0, 2)).ToString());
