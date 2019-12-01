@@ -45,8 +45,11 @@ public class PauseManager : MonoBehaviour
 		{
 			instance = this;
 		}
-		IsInPause = false;
     }
+
+	private void Start() {
+		IsInPause = false;
+	}
 
 	private void Update() 
 	{

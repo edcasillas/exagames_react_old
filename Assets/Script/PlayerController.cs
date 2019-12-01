@@ -44,8 +44,6 @@ public class PlayerController : CharacterThirdPerson {
 	}
 
 	private void Awake() {
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
 		healthBarController = GetComponent<HealthBarController>();
 		rigidbody = GetComponent<Rigidbody>();
 		Health = InitialHealth;
@@ -78,6 +76,9 @@ public class PlayerController : CharacterThirdPerson {
 	}
 
 	private void HandleAiming() {
+		if (Health <= 0)
+			return;
+
 		if (!AimController?.ik.solver.transform)
 			return;
 
@@ -101,8 +102,6 @@ public class PlayerController : CharacterThirdPerson {
 		}
 
 		animator.SetLayerWeight((int)AnimatorLayer.Aiming, newAimingLayerWeight);
-
-
 	}
 
 	public void OnWeaponPickedUp(GameObject weapon) {
@@ -112,6 +111,10 @@ public class PlayerController : CharacterThirdPerson {
 
 	private void OnCollisionEnter(Collision collision) {
 		CheckIfShouldReceiveDamage(collision.gameObject);
+	}
+
+	private void OnTriggerEnter(Collider other) {
+		CheckIfShouldReceiveDamage(other.gameObject);
 	}
 
 	private void OnParticleCollision(GameObject other) {
