@@ -7,12 +7,17 @@ public class Gun : MonoBehaviour {
 	public float WaterLevel = 100;
 	public float ConsumeSpeed = 20f;
 	public Image WaterLevelFillImage;
+	public GameObject HudItem;
 
 	private bool isRecovering;
 	[SerializeField] PlayerController playerController;
 
 	[Header("Sound Variables")]
 	[SerializeField] GunSounds gS;
+
+	private void OnEnable() {
+		HudItem.SetActive(true);
+	}
 
 
 	private void Update() {
