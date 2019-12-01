@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d23579bc8515d4d8443b3a56060c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playButton: {fileID: 5643357526857326644}
+  _playButton: {fileID: 7904179580462487406}
   _sceneName: 0
   audioSource: {fileID: 0}
   buttonSound: {fileID: 0}
@@ -390,7 +390,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5643357525874591066}
-        m_MethodName: PlayAgain
+        m_MethodName: GoToVolcano
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

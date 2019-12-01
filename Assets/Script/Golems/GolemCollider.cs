@@ -12,4 +12,10 @@ public class GolemCollider : MonoBehaviour {
 		//if (!col)
 		//	Golem.TakeDamage(1);
 	}
+
+	//private void OnParticleTrigger(GameObject other) 
+	//{
+	//	var golemDamagerObject = other.GetComponent<GolemDamagerObject>();
+	//	if (golemDamagerObject) Golem.TakeDamage(golemDamagerObject.DamageToProvoke);
+	//}
 }

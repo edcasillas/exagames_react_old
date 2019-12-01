@@ -15,6 +15,7 @@ public abstract class GolemController : MonoBehaviour
 	[SerializeField] private GameObject winCanvas;
 
 	protected bool canAttack = true;
+	[SerializeField]
 	protected bool takingDamage = false;
 	protected bool specialAttackTriggered;
 
@@ -33,6 +34,9 @@ public abstract class GolemController : MonoBehaviour
 	//private Rigidbody rb;
 	[SerializeField]
 	protected BoxCollider collision;
+
+	[SerializeField]
+	private GameObject shield;
 
 	#region Boss Stats
 	[SerializeField]
@@ -99,7 +103,7 @@ public abstract class GolemController : MonoBehaviour
 						if (Debug.isDebugBuild) Debug.Log("Attack");
 						Attack();
 					}
-				} else if (player.Health > 0 && IsChasing && Vector3.Distance(player.transform.position, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) {
+				} else if (player.Health > 0 && IsChasing && Vector3.Distance(player.transform.position, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && (actualState == GolemStates.Idle || actualState == GolemStates.Walking) && !takingDamage) {
 					Walk();
 				}
 			} else//When the player is dead
@@ -142,15 +146,12 @@ public abstract class GolemController : MonoBehaviour
 	protected void PlayAnimationWithTrigger(string _triggerName) 
 	{
 		animator.SetTrigger(_triggerName);
-
-		if(_triggerName == SPECIAL_ATTACK_TRIGGER) 
-		{
+		//SetAnimationBool(WALKING_BOOL, false);
+		if (_triggerName == SPECIAL_ATTACK_TRIGGER) {
 			SetAnimationBool(WALKING_BOOL, false);
-		}else if (_triggerName == ATTACK_TRIGGER) 
-		{
+		} else if (_triggerName == ATTACK_TRIGGER) {
 			SetAnimationBool(WALKING_BOOL, false);
-		}else if(_triggerName == DEATH_TRIGGER) 
-		{
+		} else if (_triggerName == DEATH_TRIGGER) {
 			SetAnimationBool(WALKING_BOOL, false);
 		}
 	}
@@ -166,16 +167,21 @@ public abstract class GolemController : MonoBehaviour
 	}
 
 	public void Walk() {
-		Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-		if(actualState != GolemStates.Walking) ChangeState(GolemStates.Walking);
-		transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
-		transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
-		SetAnimationBool(WALKING_BOOL, true);
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME) || animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME)) 
+		{
+			Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+			if (actualState != GolemStates.Walking) ChangeState(GolemStates.Walking);
+			transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+			transform.position = Vector3.MoveTowards(transform.position, playerPos, walkSpeed * Time.deltaTime);
+			SetAnimationBool(WALKING_BOOL, true);
+		}
 	}
 
 	public void TakeDamage(int _damage) {
 		if (!takingDamage) {
 			takingDamage = true;
+			shield.SetActive(true);
+			ChangeState(GolemStates.TakingDamage);
 			StartCoroutine(TakeDamageWithCoroutine(_damage));
 		}
 		Debug.Log("Lenght: " + animator.GetCurrentAnimatorStateInfo(0).length);
@@ -188,10 +194,11 @@ public abstract class GolemController : MonoBehaviour
 			Health -= _damage;
 			PlayAnimationWithTrigger(TAKE_DAMAGE_TRIGGER);
 			yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+			takingDamage = false;
+			ChangeState(GolemStates.Idle);
 		}
 		yield return new WaitForSeconds(cooldownGetDamage);
-		takingDamage = false;
-		ChangeState(GolemStates.Idle);
+		shield.SetActive(false);
 	}
 
 	protected void Attack() {
