@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour {
 	public float WaterLevel = 100;
 	public float ConsumeSpeed = 20f;
 	public Image WaterLevelFillImage;
+	public GameObject HudItem;
 
 	private bool isRecovering;
 	[SerializeField] PlayerController playerController;
@@ -14,16 +15,14 @@ public class Gun : MonoBehaviour {
 	[Header("Sound Variables")]
 	[SerializeField] GunSounds gS;
 
+	private void OnEnable() => HudItem.SetActive(true);
 
 	private void Update() {
 		if (isRecovering) {
-
-			
-			if(!gS.GetAudioSource().isPlaying) {
-
-			gS.PlayReloadingSound();
+			if (!gS.GetAudioSource().isPlaying) {
+				gS.PlayReloadingSound();
 			}
-			
+
 			Particles.Stop();
 			WaterLevel += ConsumeSpeed * 2 * Time.deltaTime;
 			if (WaterLevel >= 100) {
