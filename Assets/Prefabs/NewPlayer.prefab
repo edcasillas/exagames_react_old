@@ -5212,6 +5212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6366c4b037f3423fb0400a4d11d70d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runByDefault: 0
   walkByDefault: 1
   canCrouch: 1
   canJump: 1
@@ -6112,9 +6113,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 600ed7b3977243f4f85db362f2cab25d, type: 3}
   - {fileID: 8300000, guid: c4bc44d4a30563d4d96d3a42af835c0a, type: 3}
   - {fileID: 8300000, guid: 3df56ccf693b60b4992021a1ddab726e, type: 3}
-  takingDamage: {fileID: 8300000, guid: a835bef4d2df0f2459dd028c4968477b, type: 3}
-  jump: {fileID: 8300000, guid: e06f955f42877df45b31258ca735df08, type: 3}
-  death: {fileID: 8300000, guid: 95caaa627a147e2429b31b952b8952b4, type: 3}
+  takingDamage: {fileID: 8300000, guid: 511db3e3807199540af4bea8117682db, type: 3}
+  jump: {fileID: 8300000, guid: 186d9502661b1c3409443c71224ee7be, type: 3}
+  death: {fileID: 8300000, guid: 16c25dcc22058614a96034a791e46676, type: 3}
   pickUpWeapon: {fileID: 8300000, guid: 7d6306d9d5730164fa7717a08f141145, type: 3}
 --- !u!1 &1254908001799544302
 GameObject:
