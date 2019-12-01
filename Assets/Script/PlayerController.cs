@@ -22,6 +22,7 @@ public class PlayerController : CharacterThirdPerson {
 	[Space]
 	public float AimLerpSpeed = .1f;
 	public AimController AimController;
+	public bool isAiming;
 
 	private GameObject equippedWeapon;
 	private HealthBarController healthBarController;
@@ -41,6 +42,8 @@ public class PlayerController : CharacterThirdPerson {
 	}
 
 	private void Awake() {
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 		healthBarController = GetComponent<HealthBarController>();
 		rigidbody = GetComponent<Rigidbody>();
 		Health = InitialHealth;
@@ -71,7 +74,7 @@ public class PlayerController : CharacterThirdPerson {
 		if (!AimController?.ik.solver.transform)
 			return;
 
-		var newWeight = Input.GetKey(KeyCode.Q) ? 1f : 0f;
+		var newWeight = Input.GetMouseButton(1) ? 1f : 0f;
 
 		var newAimingLayerWeight = AimController.weight;
 		newAimingLayerWeight = Mathf.Lerp(AimController.weight, newWeight, AimLerpSpeed);
@@ -79,11 +82,19 @@ public class PlayerController : CharacterThirdPerson {
 
 		if (newWeight == 0f) {
 			newAimingLayerWeight = animator.GetLayerWeight((int)AnimatorLayer.Aiming);
-			if (AimController.weight <= 0.05f)
+			if (AimController.weight <= 0.05f) {
 				newAimingLayerWeight = Mathf.Lerp(newAimingLayerWeight, newWeight, AimLerpSpeed * 1.2f);
+			}
+		}
+
+		if (newWeight == 1) {
+			isAiming = true;
+		} else {
+			isAiming = false;
 		}
 
 		animator.SetLayerWeight((int)AnimatorLayer.Aiming, newAimingLayerWeight);
+
 
 	}
 

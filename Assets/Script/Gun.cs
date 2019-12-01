@@ -9,27 +9,53 @@ public class Gun : MonoBehaviour {
 	public Image WaterLevelFillImage;
 
 	private bool isRecovering;
+	[SerializeField] PlayerController playerController;
+
+	[Header("Sound Variables")]
+	[SerializeField] GunSounds gS;
+
 
 	private void Update() {
 		if (isRecovering) {
+
+			
+			if(!gS.GetAudioSource().isPlaying) {
+
+			gS.PlayReloadingSound();
+			}
+			
 			Particles.Stop();
 			WaterLevel += ConsumeSpeed * 2 * Time.deltaTime;
 			if (WaterLevel >= 100) {
 				WaterLevel = 100;
 				isRecovering = false;
+				gS.GetAudioSource().Stop();
+				
 			}
 		} else {
 			var fire = Input.GetAxis("Fire1");
-			if (fire > 0f) {
-				WaterLevel -= ConsumeSpeed * Time.deltaTime;
-				if (WaterLevel > 0f) {
-					Particles.Play();
+			if(playerController) {
+
+				if (fire > 0f && playerController.isAiming) {
+					WaterLevel -= ConsumeSpeed * Time.deltaTime;
+					if (WaterLevel > 0f) {
+						Particles.Play();
+						if(!gS.GetAudioSource().isPlaying && !gS.isPaused) {
+							gS.PlayShootSound();
+						}
+						else if(gS.isPaused) {
+							gS.Resume();
+						}
+					} else {
+						isRecovering = true;
+						Particles.Stop();
+						gS.GetAudioSource().Stop();
+					}
 				} else {
-					isRecovering = true;
 					Particles.Stop();
+					gS.Pause();
+
 				}
-			} else {
-				Particles.Stop();
 			}
 		}
 

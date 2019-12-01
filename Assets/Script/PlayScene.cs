@@ -8,6 +8,8 @@ public class PlayScene : MonoBehaviour {
 
 	[SerializeField] private Button _playButton;
 	[SerializeField] private Scenes _sceneName;
+	[SerializeField] AudioSource audioSource;
+	[SerializeField] AudioClip buttonSound;
 
 	private void Start()
 	{
@@ -16,6 +18,8 @@ public class PlayScene : MonoBehaviour {
 
 	public void LoadScene(Scenes sceneName)
 	{
+		audioSource.PlayOneShot(buttonSound);
+
 		SceneManager.LoadScene(sceneName.ToString());
 	}
 

@@ -24,18 +24,27 @@ public class BossProjectileController : MonoBehaviour
 	{
 		Vector3 pos = new Vector3(0, 0, transform.localPosition.z);
 		rb.AddRelativeForce(pos * projectileForce, ForceMode.Impulse);
-		StartCoroutine(destroyProjectil());
+		StartCoroutine(destroyProjectil(5));
 	}
 
-	private IEnumerator destroyProjectil() 
+	private IEnumerator destroyProjectil(float _time) 
 	{
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(_time);
 		Destroy(gameObject);
 	}
 
-	private void OnCollisionEnter(Collision collision) {
-		Debug.Log("Collision object: " + collision.gameObject.name);
+	private void OnCollisionEnter(Collision collision)
+	{
+		var player = collision.gameObject.GetComponent<PlayerController>();
+		if (player)
+		{
+			StartCoroutine(destroyProjectil(0));
+		}
 	}
+
+	//private void OnCollisionEnter(Collision collision) {
+	//	Debug.Log("Collision object: " + collision.gameObject.name);
+	//}
 
 	//TODO: Make damage to the player in a trigger or collision enter
 }
