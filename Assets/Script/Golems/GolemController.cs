@@ -1,22 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GolemsEnums;
+using System.Collections;
 using UnityEngine;
-using GolemsEnums;
 
 [RequireComponent(typeof(HealthBarController))]
 public abstract class GolemController : MonoBehaviour
 {
-	[SerializeField]
-	protected Animator animator;
-	[SerializeField]
-	protected float walkSpeed;
-	[SerializeField]
-	protected float maxCloseDistance;
-	[SerializeField]
-	protected float maxChasingRange;
-	[SerializeField]
-	protected float attackCooldownTime;
+	[SerializeField] private Animator animator;
+	[SerializeField] private float walkSpeed;
+	[SerializeField] private float maxCloseDistance;
+	[SerializeField] private float maxChasingRange;
+	[SerializeField] private float attackCooldownTime;
 
+	[SerializeField] private GameObject healthBarHudItem;
 	[SerializeField] private GameObject winCanvas;
 
 	protected bool canAttack = true;
@@ -24,13 +19,7 @@ public abstract class GolemController : MonoBehaviour
 	protected bool specialAttackTriggered;
 
 	protected bool isChasing = false;
-	protected bool IsChasing 
-	{
-		get 
-		{
-			return Vector3.Distance(player.transform.position, transform.position) < maxChasingRange;
-		}
-	}
+	protected bool IsChasing => Vector3.Distance(player.transform.position, transform.position) < maxChasingRange;
 
 	protected HealthBarController healthBarController;
 
@@ -87,13 +76,13 @@ public abstract class GolemController : MonoBehaviour
 	[SerializeField]
 	protected GolemStates actualState = GolemStates.Idle;
 
-	protected void Awake()
+	protected virtual void Awake()
     {
 		healthBarController = GetComponent<HealthBarController>();
 		Health = maxLife;
 	}
 
-	protected void Update()
+	protected virtual void Update()
     {
 		if (Health <= 0)
 			isDead = true;
@@ -126,6 +115,8 @@ public abstract class GolemController : MonoBehaviour
 			}
 		}
 	}
+
+	private void OnEnable() => healthBarHudItem.SetActive(true);
 
 	//private bool IsChasing() 
 	//{
