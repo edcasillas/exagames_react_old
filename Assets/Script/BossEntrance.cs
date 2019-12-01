@@ -7,6 +7,8 @@ public class BossEntrance : MonoBehaviour
 	[SerializeField]
 	private ParticleSystem fireFx;
 	[SerializeField]
+	private GameObject fireRingTriggers;
+	[SerializeField]
 	private AudioSource fireRingExplosionSound;
 	[SerializeField]
 	private AudioClip fireRingExplosionClip;
@@ -33,6 +35,7 @@ public class BossEntrance : MonoBehaviour
 			}
 
 			fireFx.Play();
+			fireRingTriggers.SetActive(true);
 			fireRingExplosionSound.PlayOneShot(fireRingExplosionClip);
 			StartCoroutine("SpawnGolem");
 		}

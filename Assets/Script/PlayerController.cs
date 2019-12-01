@@ -116,6 +116,10 @@ public class PlayerController : CharacterThirdPerson {
 		CheckIfShouldReceiveDamage(collision.gameObject);
 	}
 
+	private void OnTriggerEnter(Collider other) {
+		CheckIfShouldReceiveDamage(other.gameObject);
+	}
+
 	private void OnParticleCollision(GameObject other) {
 		CheckIfShouldReceiveDamage(other);
 	}
