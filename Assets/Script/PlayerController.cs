@@ -6,7 +6,6 @@ using UnityStandardAssets.Cameras;
 
 [RequireComponent(typeof(HealthBarController))]
 public class PlayerController : CharacterThirdPerson {
-
 	public enum AnimatorLayer {
 		Base,
 		Aiming,
@@ -29,8 +28,7 @@ public class PlayerController : CharacterThirdPerson {
 	private HealthBarController healthBarController;
 	private Rigidbody rigidbody;
 	[SerializeField] private GameObject gameoverCanvas;
-	[SerializeField]
-	private FreeLookCam freeLookCam;
+	[SerializeField] private FreeLookCam freeLookCam;
 
 	public int InitialHealth;
 

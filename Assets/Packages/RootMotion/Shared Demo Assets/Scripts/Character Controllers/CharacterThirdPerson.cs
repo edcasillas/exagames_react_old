@@ -28,6 +28,7 @@ namespace RootMotion.Demos {
 
 		[Header("References")]
 		public CharacterAnimationBase characterAnimation; // the animation controller
+		public PlayerSounds playerSounds;
 		public UserControlThirdPerson userControl; // user input
 		public CameraController cam; // Camera controller (optional). If assigned will update the camera in LateUpdate only if character moves
 
@@ -164,6 +165,7 @@ namespace RootMotion.Demos {
 			if (onGround) {
 				// Jumping
 				animState.jump = Jump();
+				if(animState.jump) playerSounds.PlayJumpSound();
 				jumpReleased = false;
 				doubleJumped = false;
 			} else {
@@ -368,7 +370,7 @@ namespace RootMotion.Demos {
 			onGround = false;
 			jumpEndTime = Time.time + 0.1f;
 
-			Vector3 jumpVelocity = userControl.state.move * airSpeed;
+			var jumpVelocity = userControl.state.move * airSpeed;
 			r.velocity = jumpVelocity;
 			r.velocity += transform.up * jumpPower;
 

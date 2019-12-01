@@ -1,8 +1,6 @@
 using UnityEngine;
-using System.Collections;
 
 namespace RootMotion.Demos {
-
 	/// <summary>
 	/// User input for a third person character controller.
 	/// </summary>
