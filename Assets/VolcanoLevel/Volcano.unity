@@ -258,60 +258,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1569589607}
-    - target: {fileID: 994067835120796723, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
-        type: 3}
-      propertyPath: playerSounds
-      value: 
-      objectReference: {fileID: 511010874}
     - target: {fileID: 8595243213981071117, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
         type: 3}
       propertyPath: Health_FillImage
       value: 
       objectReference: {fileID: 1605284850}
-    - target: {fileID: 796527161, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 796527161, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: MaxDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 796527161, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 796527161, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: Mute
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 796527161, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: m_Volume
-      value: 0.669
-      objectReference: {fileID: 0}
-    - target: {fileID: 700092507, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: m_Volume
-      value: 0.504
-      objectReference: {fileID: 0}
-    - target: {fileID: 700092506, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: takingDamage
-      value: 
-      objectReference: {fileID: 8300000, guid: a835bef4d2df0f2459dd028c4968477b, type: 3}
-    - target: {fileID: 700092506, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: jump
-      value: 
-      objectReference: {fileID: 8300000, guid: e06f955f42877df45b31258ca735df08, type: 3}
-    - target: {fileID: 700092506, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: death
-      value: 
-      objectReference: {fileID: 8300000, guid: 95caaa627a147e2429b31b952b8952b4, type: 3}
-    - target: {fileID: 700092506, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: pickUpWeapon
-      value: 
-      objectReference: {fileID: 8300000, guid: 7d6306d9d5730164fa7717a08f141145, type: 3}
-    - target: {fileID: 746117677, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: _gameoverCanvas
-      value: 
-      objectReference: {fileID: 1731749347}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
 --- !u!224 &125420108 stripped
@@ -1327,18 +1278,6 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 3017061340477791053}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &511010874 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 700092506, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
-    type: 3}
-  m_PrefabInstance: {fileID: 103331186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f394417ddc6fe64ca26b1df55c74cf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &704484260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,12 +2100,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d2df505355ef494ab38806ad1428352, type: 3}
---- !u!1 &1731749347 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 755519077480017521, guid: 0d2df505355ef494ab38806ad1428352,
-    type: 3}
-  m_PrefabInstance: {fileID: 1731749346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1743821962
 GameObject:
   m_ObjectHideFlags: 0
