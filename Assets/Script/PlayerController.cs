@@ -42,6 +42,8 @@ public class PlayerController : CharacterThirdPerson {
 	}
 
 	private void Awake() {
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 		healthBarController = GetComponent<HealthBarController>();
 		rigidbody = GetComponent<Rigidbody>();
 		Health = InitialHealth;
@@ -73,7 +75,7 @@ public class PlayerController : CharacterThirdPerson {
 		if (!AimController?.ik.solver.transform)
 			return;
 
-		var newWeight = Input.GetKey(KeyCode.Q) ? 1f : 0f;
+		var newWeight = Input.GetMouseButton(1) ? 1f : 0f;
 
 		var newAimingLayerWeight = AimController.weight;
 		newAimingLayerWeight = Mathf.Lerp(AimController.weight, newWeight, AimLerpSpeed);
