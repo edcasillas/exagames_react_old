@@ -15,7 +15,6 @@ public abstract class GolemController : MonoBehaviour
 	[SerializeField] private GameObject winCanvas;
 
 	protected bool canAttack = true;
-	[SerializeField]
 	protected bool takingDamage = false;
 	protected bool specialAttackTriggered;
 
