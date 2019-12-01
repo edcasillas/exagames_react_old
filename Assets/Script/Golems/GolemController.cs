@@ -98,18 +98,24 @@ public abstract class GolemController : MonoBehaviour
 			isDead = true;
 
 		if (!isDead) {
-			if (Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance && canAttack && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) {
-				if (specialAttackTriggered && canAttack) 
-				{
-					TriggerSpecialAttack();
-				} else if(canAttack)
-				{
-					if (Debug.isDebugBuild) Debug.Log("Attack");
-					Attack();
-				}
-			} else if (player.Health > 0 && IsChasing && Vector3.Distance(player.transform.position, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) 
+			if (player.Health > 0)
 			{
-				Walk();
+				if (Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance && canAttack && (actualState == GolemStates.Idle || actualState == GolemStates.Walking))
+				{
+					if (specialAttackTriggered && canAttack)
+					{
+						TriggerSpecialAttack();
+					} else if (canAttack) {
+						if (Debug.isDebugBuild) Debug.Log("Attack");
+						Attack();
+					}
+				} else if (player.Health > 0 && IsChasing && Vector3.Distance(player.transform.position, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)) {
+					Walk();
+				}
+			} else//When the player is dead
+			{
+				ChangeState(GolemStates.Idle);
+				SetAnimationBool(WALKING_BOOL, false);
 			}
 		} else 
 		{
