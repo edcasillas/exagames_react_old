@@ -231,5 +231,6 @@ public abstract class GolemController : MonoBehaviour
 	{
 		collision.enabled = false;
 		PlayAnimationWithTrigger(DEATH_TRIGGER);
+		animDeadPlayed = true;
 	}
 }
