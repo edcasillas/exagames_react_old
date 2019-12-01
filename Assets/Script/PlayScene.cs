@@ -13,7 +13,7 @@ public class PlayScene : MonoBehaviour {
 
 	private void Start()
 	{
-		_playButton.onClick.AddListener(() => LoadScene(_sceneName));
+		//_playButton.onClick.AddListener(() => LoadScene(_sceneName));
 	}
 
 	public void LoadScene(Scenes sceneName)
@@ -21,6 +21,10 @@ public class PlayScene : MonoBehaviour {
 		audioSource.PlayOneShot(buttonSound);
 
 		SceneManager.LoadScene(sceneName.ToString());
+	}
+
+	public void GoToVolcano() {
+		SceneManager.LoadScene(Scenes.Volcano.ToString());
 	}
 
 	public void GoToMainMenu() 

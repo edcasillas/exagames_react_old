@@ -13,9 +13,9 @@ public class GolemCollider : MonoBehaviour {
 		//	Golem.TakeDamage(1);
 	}
 
-	private void OnParticleTrigger(GameObject other) 
-	{
-		var golemDamagerObject = other.GetComponent<GolemDamagerObject>();
-		if (golemDamagerObject) Golem.TakeDamage(golemDamagerObject.DamageToProvoke);
-	}
+	//private void OnParticleTrigger(GameObject other) 
+	//{
+	//	var golemDamagerObject = other.GetComponent<GolemDamagerObject>();
+	//	if (golemDamagerObject) Golem.TakeDamage(golemDamagerObject.DamageToProvoke);
+	//}
 }
