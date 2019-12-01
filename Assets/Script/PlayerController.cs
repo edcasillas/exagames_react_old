@@ -27,6 +27,7 @@ public class PlayerController : CharacterThirdPerson {
 	private GameObject equippedWeapon;
 	private HealthBarController healthBarController;
 	private Rigidbody rigidbody;
+	[SerializeField] private GameObject gameoverCanvas; 
 
 	public int InitialHealth;
 
@@ -64,6 +65,7 @@ public class PlayerController : CharacterThirdPerson {
 			rigidbody.velocity = Vector3.zero;
 			rigidbody.angularVelocity = Vector3.zero;
 			animator.SetTrigger(AnimatorTriggers.Death.ToString());
+			gameoverCanvas.SetActive(true);
 			enabled = false;
 		} else {
 			animator.SetTrigger(((AnimatorTriggers)Random.Range(0, 2)).ToString());
