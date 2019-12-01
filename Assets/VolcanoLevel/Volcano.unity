@@ -3019,6 +3019,11 @@ PrefabInstance:
       propertyPath: gS
       value: 
       objectReference: {fileID: 2065385453}
+    - target: {fileID: 8638969658920520361, guid: bc868a4623b2a9846915ac3e928902fc,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 791499617}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc868a4623b2a9846915ac3e928902fc, type: 3}
 --- !u!1001 &4912617248603138260

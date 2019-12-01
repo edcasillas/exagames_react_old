@@ -34,25 +34,28 @@ public class Gun : MonoBehaviour {
 			}
 		} else {
 			var fire = Input.GetAxis("Fire1");
-			if (fire > 0f && playerController.isAiming) {
-				WaterLevel -= ConsumeSpeed * Time.deltaTime;
-				if (WaterLevel > 0f) {
-					Particles.Play();
-					if(!gS.GetAudioSource().isPlaying && !gS.isPaused) {
-						gS.PlayShootSound();
-					}
-					else if(gS.isPaused) {
-						gS.Resume();
+			if(playerController) {
+
+				if (fire > 0f && playerController.isAiming) {
+					WaterLevel -= ConsumeSpeed * Time.deltaTime;
+					if (WaterLevel > 0f) {
+						Particles.Play();
+						if(!gS.GetAudioSource().isPlaying && !gS.isPaused) {
+							gS.PlayShootSound();
+						}
+						else if(gS.isPaused) {
+							gS.Resume();
+						}
+					} else {
+						isRecovering = true;
+						Particles.Stop();
+						gS.GetAudioSource().Stop();
 					}
 				} else {
-					isRecovering = true;
 					Particles.Stop();
-					gS.GetAudioSource().Stop();
-				}
-			} else {
-				Particles.Stop();
-				gS.Pause();
+					gS.Pause();
 
+				}
 			}
 		}
 
