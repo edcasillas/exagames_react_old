@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GolemsEnums;
+using System.Collections;
 using UnityEngine;
-using GolemsEnums;
 
 public class FireGolemController : GolemController
 {
