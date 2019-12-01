@@ -16,6 +16,9 @@ public abstract class GolemController : MonoBehaviour
 	protected float maxChasingRange;
 	[SerializeField]
 	protected float attackCooldownTime;
+
+	[SerializeField] private GameObject winCanvas;
+
 	protected bool canAttack = true;
 	protected bool takingDamage = false;
 	protected bool specialAttackTriggered;
@@ -90,9 +93,7 @@ public abstract class GolemController : MonoBehaviour
 		Health = maxLife;
 	}
 
-	//private
-
-    protected void Update()
+	protected void Update()
     {
 		if (Health <= 0)
 			isDead = true;
@@ -237,6 +238,7 @@ public abstract class GolemController : MonoBehaviour
 	{
 		collision.enabled = false;
 		PlayAnimationWithTrigger(DEATH_TRIGGER);
+		winCanvas.SetActive(true);
 		animDeadPlayed = true;
 	}
 }
