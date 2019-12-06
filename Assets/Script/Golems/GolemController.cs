@@ -36,7 +36,7 @@ public abstract class GolemController : MonoBehaviour
 	protected BoxCollider collision;
 
 	[SerializeField]
-	private GameObject shield;
+	protected GameObject shield;
 
 	#region Boss Stats
 	[SerializeField]
@@ -178,26 +178,34 @@ public abstract class GolemController : MonoBehaviour
 	}
 
 	public void TakeDamage(int _damage) {
+		//Debug.Log("Taking damage");
 		if (!takingDamage) {
+			//Debug.LogWarning("Damage taked");
 			takingDamage = true;
-			shield.SetActive(true);
-			ChangeState(GolemStates.TakingDamage);
+			StopAllCoroutines();
 			StartCoroutine(TakeDamageWithCoroutine(_damage));
 		}
-		Debug.Log("Lenght: " + animator.GetCurrentAnimatorStateInfo(0).length);
-		Debug.Log("Normalized Time: " + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+		
 	}
 
 	protected IEnumerator TakeDamageWithCoroutine(int _damage) {
 		if (!isDead) 
 		{
+			shield.SetActive(true);
+			ChangeState(GolemStates.TakingDamage);
 			Health -= _damage;
 			PlayAnimationWithTrigger(TAKE_DAMAGE_TRIGGER);
+			SetAnimationBool(WALKING_BOOL, false);
+			//Debug.Log("Playing take damage animation");
 			yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-			takingDamage = false;
+			//Debug.Log("Finished take damage animation");
 			ChangeState(GolemStates.Idle);
+			canAttack = false;
 		}
 		yield return new WaitForSeconds(cooldownGetDamage);
+		//Debug.Log("Finished cooldown");
+		canAttack = true;
+		takingDamage = false;
 		shield.SetActive(false);
 	}
 
