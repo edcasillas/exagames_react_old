@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeScene : MonoBehaviour
-{
-    public void LoadScene(string _sceneName)
-		{
-		SceneManager.LoadScene(_sceneName);
+public class ChangeScene : MonoBehaviour {
+	public void LoadScene(string _sceneName) 
+	{
+		ScenesManager.Instance.ChangeScene(_sceneName);
 	}
 }

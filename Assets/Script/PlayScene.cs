@@ -1,36 +1,32 @@
-﻿
-using Enums;
+﻿using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayScene : MonoBehaviour {
-
+public class PlayScene : MonoBehaviour 
+{
 	[SerializeField] private Button _playButton;
 	[SerializeField] private Scenes _sceneName;
 	[SerializeField] AudioSource audioSource;
 	[SerializeField] AudioClip buttonSound;
 
-	private void Start()
-	{
+	private void Start() {
 		//_playButton.onClick.AddListener(() => LoadScene(_sceneName));
 	}
 
-	public void LoadScene(Scenes sceneName)
-	{
+	public void LoadScene(Scenes sceneName) {
 		audioSource.PlayOneShot(buttonSound);
 
-		SceneManager.LoadScene(sceneName.ToString());
+		ScenesManager.Instance.ChangeScene(sceneName.ToString());
 	}
 
-	public void GoToVolcano() {
-		SceneManager.LoadScene(Scenes.Volcano.ToString());
-	}
-
-	public void GoToMainMenu() 
+	public void GoToVolcano() 
 	{
-		audioSource.PlayOneShot(buttonSound);
-		SceneManager.LoadScene("MainMenu");
+		ScenesManager.Instance.ChangeScene(Scenes.Volcano.ToString());
 	}
 
+	public void GoToMainMenu() {
+		audioSource.PlayOneShot(buttonSound);
+		ScenesManager.Instance.ChangeScene(Scenes.MainMenu.ToString());
+	}
 }
