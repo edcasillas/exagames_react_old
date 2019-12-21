@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour
 
 		StopCurrentLoopCoroutine();
 		
-		_loopCoroutine = PlayDelayedLoop(clipName, _musicSource.clip.length - _musicSource.clip.);
+		_loopCoroutine = PlayDelayedLoop(clipName, _musicSource.clip.length - _musicSource.time);
 		StartCoroutine(_loopCoroutine);
 	}
 
