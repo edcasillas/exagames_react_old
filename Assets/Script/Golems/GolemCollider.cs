@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Golems;
+using UnityEngine;
 
 public class GolemCollider : MonoBehaviour {
 	public GolemController Golem;

@@ -1,36 +1,39 @@
-﻿using GolemsEnums;
-using System.Collections;
+﻿using System.Collections;
+using GolemsEnums;
 using UnityEngine;
 
-public class FireGolemController : GolemController
+namespace Golems
 {
-	#region Shot / Special Ability
-	[SerializeField]
-	private GameObject startProjectilePosition;
-	[SerializeField]
-	private GameObject projectilePrefab;
-	#endregion
-
-	public override void TriggerSpecialAttack() 
+	public class FireGolemController : GolemController
 	{
-		if (!isDead && canAttack && !takingDamage) 
+		#region Shot / Special Ability
+		[SerializeField]
+		private GameObject startProjectilePosition;
+		[SerializeField]
+		private GameObject projectilePrefab;
+		#endregion
+
+		public override void TriggerSpecialAttack() 
 		{
-			ChangeState(GolemStates.SpecialAttacking);
-			PlayAnimationWithTrigger(SPECIAL_ATTACK_TRIGGER);
-			StartCoroutine(SpawnProjectilWithDelay(1.5f));
-			StartCoroutine(CooldownAttack());
-			StartCoroutine(ChangeStateWhenAnimationIsOver(SPECIAL_ATTACK_STATE_NAME, GolemStates.Idle));
+			if (!isDead && canAttack && !takingDamage) 
+			{
+				ChangeState(GolemStates.SpecialAttacking);
+				PlayAnimationWithTrigger(SPECIAL_ATTACK_TRIGGER);
+				StartCoroutine(SpawnProjectilWithDelay(1.5f));
+				StartCoroutine(CooldownAttack());
+				StartCoroutine(ChangeStateWhenAnimationIsOver(SPECIAL_ATTACK_STATE_NAME, GolemStates.Idle));
+			}
 		}
-	}
 
-	private IEnumerator SpawnProjectilWithDelay(float _timeToDelay) {
-		yield return new WaitForSeconds(_timeToDelay);
-		SpawnProjectil();
-	}
+		private IEnumerator SpawnProjectilWithDelay(float _timeToDelay) {
+			yield return new WaitForSeconds(_timeToDelay);
+			SpawnProjectil();
+		}
 
-	private void SpawnProjectil() {
-		Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
-		specialAttackTriggered = false;
-		canAttack = false;
+		private void SpawnProjectil() {
+			Instantiate(projectilePrefab, startProjectilePosition.transform.position, startProjectilePosition.transform.rotation);
+			specialAttackTriggered = false;
+			canAttack = false;
+		}
 	}
 }
