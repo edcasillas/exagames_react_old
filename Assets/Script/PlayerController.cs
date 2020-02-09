@@ -1,4 +1,4 @@
-﻿using Audio.Configurations;
+﻿using Audio.Configuration;
 using RootMotion.Demos;
 using RootMotion.FinalIK;
 using UnityEngine;

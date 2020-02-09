@@ -1,6 +1,6 @@
 ﻿using GolemsEnums;
 using System.Collections;
-using Audio.Configurations;
+using Audio.Configuration;
 using UnityEngine;
 
 [RequireComponent(typeof(HealthBarController))]

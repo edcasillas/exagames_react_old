@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Audio.Configurations;
+using Audio.Configuration;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
