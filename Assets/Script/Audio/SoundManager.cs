@@ -52,5 +52,4 @@ public class SoundManager : MonoBehaviour {
 		PlaySingleClip(clipName);
 		_musicSource.loop = true;
 	}
-
 }
