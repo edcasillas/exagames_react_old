@@ -3,7 +3,6 @@ using Audio.Configuration;
 using RootMotion.Demos;
 using RootMotion.FinalIK;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityStandardAssets.Cameras;
 
 [RequireComponent(typeof(HealthBarController))]
