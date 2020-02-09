@@ -1,4 +1,5 @@
-﻿using RootMotion.Demos;
+﻿using Audio.Configurations;
+using RootMotion.Demos;
 using RootMotion.FinalIK;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,6 +66,7 @@ public class PlayerController : CharacterThirdPerson {
 			rigidbody.angularVelocity = Vector3.zero;
 			animator.SetTrigger(AnimatorTriggers.Death.ToString());
 			gameoverCanvas.SetActive(true);
+			SoundManager.Instance.PlaySingleClip(MusicClipName.PlayerLoses);
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 			freeLookCam.enabled = false;
