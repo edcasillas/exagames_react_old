@@ -1,15 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Audio.Configuration;
 using UnityEngine;
 
 namespace Audio {
 	public class SoundManager : MonoBehaviour {
+		public static SoundManager Instance { get; private set; }
+
 		[SerializeField] private AudioSource _musicSource;
 		[SerializeField] private MusicConfiguration _configuration;
 
-		private IEnumerator _loopCoroutine;
-
-		public static SoundManager Instance { get; private set; }
+		private IEnumerator loopCoroutine;
 
 		private void Start() {
 			if (Instance == null) {
@@ -17,40 +18,48 @@ namespace Audio {
 			} else if (Instance != this) {
 				Destroy(gameObject);
 			}
-
-			DontDestroyOnLoad(gameObject);
 		}
 
-		public void PlaySingleClip(MusicClipName clipName) {
-			var clip = _configuration.GetAudioClip(clipName);
+		private void OnDestroy() {
+			if (Instance == this) Instance = null;
+		}
+
+		public void Play(MusicClipName clipName, bool loop = false, Action onFinished = null) {
+			var clip = _configuration.Get(clipName);
 			_musicSource.clip = clip;
-			_musicSource.loop = false;
+			_musicSource.loop = loop;
 			_musicSource.Play();
+			if(onFinished != null) StartCoroutine(invokeDelayed(onFinished, clip.length));
+		}
+
+		private IEnumerator invokeDelayed(Action action, float delay) {
+			yield return new WaitForSeconds(delay);
+			action.Invoke();
 		}
 
 		public void PlayLoopClip(MusicClipName clipName, bool stopCurrentClip) {
 			if (stopCurrentClip) {
-				PlaySingleClip(clipName);
+				Play(clipName);
 				_musicSource.loop = true;
 				return;
 			}
 
-			StopCurrentLoopCoroutine();
+			stopCurrentLoopCoroutine();
 
-			_loopCoroutine = PlayDelayedLoop(clipName, _musicSource.clip.length - _musicSource.time);
-			StartCoroutine(_loopCoroutine);
+			loopCoroutine = playDelayedLoop(clipName, _musicSource.clip.length - _musicSource.time);
+			StartCoroutine(loopCoroutine);
 		}
 
-		private void StopCurrentLoopCoroutine() {
-			if (_loopCoroutine != null) {
-				StopCoroutine(_loopCoroutine);
-				_loopCoroutine = null;
+		private void stopCurrentLoopCoroutine() {
+			if (loopCoroutine != null) {
+				StopCoroutine(loopCoroutine);
+				loopCoroutine = null;
 			}
 		}
 
-		private IEnumerator PlayDelayedLoop(MusicClipName clipName, float delayedTime) {
+		private IEnumerator playDelayedLoop(MusicClipName clipName, float delayedTime) {
 			yield return new WaitForSeconds(delayedTime);
-			PlaySingleClip(clipName);
+			Play(clipName);
 			_musicSource.loop = true;
 		}
 	}

@@ -8,8 +8,8 @@ namespace Audio.Configuration {
 
 		private Dictionary<MusicClipName, AudioClip> _clipsDictionary;
 
-		public AudioClip GetAudioClip(MusicClipName musicClipName) {
-			InitializeDictionaryIfNeeded();
+		public AudioClip Get(MusicClipName musicClipName) {
+			initializeDictionaryIfNeeded();
 
 			if (_clipsDictionary.TryGetValue(musicClipName, out var clip)) {
 				return clip;
@@ -19,7 +19,7 @@ namespace Audio.Configuration {
 			return null;
 		}
 
-		private void InitializeDictionaryIfNeeded() {
+		private void initializeDictionaryIfNeeded() {
 			if (_clipsDictionary == null) {
 				_clipsDictionary = new Dictionary<MusicClipName, AudioClip>();
 
