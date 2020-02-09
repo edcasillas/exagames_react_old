@@ -239,7 +239,7 @@ public abstract class GolemController : MonoBehaviour
 		collision.enabled = false;
 		PlayAnimationWithTrigger(DEATH_TRIGGER);
 		winCanvas.SetActive(true);
-		SoundManager.Instance.PlaySingleClip(MusicClipName.PlayerWin);
 		animDeadPlayed = true;
+		SoundManager.Instance.PlaySingleClip(MusicClipName.PlayerWin);
 	}
 }
