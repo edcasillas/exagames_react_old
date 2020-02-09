@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 [RequireComponent(typeof(VideoPlayer))]
-public class MainMenuLoader : MonoBehaviour 
-{
+public class MainMenuLoader : MonoBehaviour {
 	private AsyncOperation asyncLoad;
 
 	private IEnumerator Start() {
-	
+
 		asyncLoad = SceneManager.LoadSceneAsync(Scenes.MainMenu.ToString());
 		asyncLoad.allowSceneActivation = false;
 
