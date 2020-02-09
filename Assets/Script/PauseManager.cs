@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Audio.Configurations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -67,5 +68,6 @@ public class PauseManager : MonoBehaviour
 	public void GoToMainMenu() 
 	{
 		SceneManager.LoadScene("MainMenu");
+		SoundManager.Instance.PlayLoopClip(MusicClipName.MainMenu, true);
 	}
 }

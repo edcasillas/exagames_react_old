@@ -1,4 +1,4 @@
-﻿
+﻿using Audio.Configurations;
 using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,15 +22,19 @@ public class PlayScene : MonoBehaviour {
 
 		SceneManager.LoadScene(sceneName.ToString());
 	}
-
-	public void GoToVolcano() {
+	
+	public void GoToVolcano() 
+	{
 		SceneManager.LoadScene(Scenes.Volcano.ToString());
+		SoundManager.Instance.PlaySingleClip(MusicClipName.StartBattleLoop);
+		SoundManager.Instance.PlayLoopClip(MusicClipName.MainBattleLoop, false);
 	}
 
+	
 	public void GoToMainMenu() 
 	{
 		audioSource.PlayOneShot(buttonSound);
 		SceneManager.LoadScene("MainMenu");
+		SoundManager.Instance.PlayLoopClip(MusicClipName.MainMenu, true);
 	}
-
 }
