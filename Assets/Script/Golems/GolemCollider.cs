@@ -11,7 +11,7 @@ public class GolemCollider : MonoBehaviour {
 		//       Ahora agregue esto para que el fuego que le hace daño al jugador no le haga daño al golem
 		//if (golemDamagerObject) 
 		//{
-			Debug.LogError("Making damage to the golem");
+			//Debug.LogError("Making damage to the golem");
 			//Golem.TakeDamage(golemDamagerObject.DamageToProvoke);
 			Golem.TakeDamage(10);
 		//}

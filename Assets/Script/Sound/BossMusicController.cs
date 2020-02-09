@@ -11,6 +11,7 @@ namespace Sound {
 		[SerializeField] private AudioClip victoryClip;
 
 		private AudioSource audioSource;
+		private bool isStarted;
 		private bool isFinished;
 		private Action onIntroFinished;
 
@@ -20,6 +21,8 @@ namespace Sound {
 		}
 
 		public void PlayIntroAndLoop(Action onIntroFinished) {
+			if (isStarted) return;
+			isStarted = true;
 			this.onIntroFinished = onIntroFinished;
 			StartCoroutine(playIntroAndLoop());
 		}
