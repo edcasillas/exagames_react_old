@@ -1,4 +1,4 @@
-namespace Audio.Configurations {
+namespace Audio.Configuration {
 	public enum MusicClipName 
 	{
 		MainMenu,

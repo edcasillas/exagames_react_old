@@ -1,53 +1,43 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Golems;
+using Sound;
 using UnityEngine;
 
-public class BossEntrance : MonoBehaviour
-{
-	[SerializeField]
-	private ParticleSystem fireFx;
-	[SerializeField]
-	private GameObject fireRingTriggers;
-	[SerializeField]
-	private AudioSource fireRingExplosionSound;
-	[SerializeField]
-	private AudioClip fireRingExplosionClip;
-	#region Golem Logic
-	[SerializeField]
-	private GolemController golemController;
-	[SerializeField]
-	private PlayerController playerController;
-	#endregion
-	// Start is called before the first frame update
-	void Start()
-    {
-		fireFx.Pause();
-    }
+public class BossEntrance : MonoBehaviour {
+	[SerializeField] private ParticleSystem fireFx;
+	[SerializeField] private GameObject fireRingTriggers;
+	[SerializeField] private AudioSource fireRingExplosionSound;
+	[SerializeField] private AudioClip fireRingExplosionClip;
 
-	private void OnTriggerEnter(Collider other) 
-	{
+	#region Golem Logic
+	[SerializeField] private GolemController golemController;
+	[SerializeField] private PlayerController playerController;
+	#endregion
+
+	private BossMusicController musicController;
+
+	private void Awake() => musicController = GetComponent<BossMusicController>();
+
+	private void Start() => fireFx.Pause();
+
+	private void OnTriggerEnter(Collider other) {
 		playerController = other.gameObject.GetComponent<PlayerController>();
-		if(playerController) 
-		{
-			if(golemController) 
-			{
+		if (playerController) {
+			if (golemController) {
 				golemController.SetPlayer(playerController);
 			}
 
 			fireFx.Play();
-			StartCoroutine("ActivateTriggers");
+			musicController.PlayIntroAndLoop(spawnGolem);
+			StartCoroutine(nameof(activateTriggers));
 			fireRingExplosionSound.PlayOneShot(fireRingExplosionClip);
-			StartCoroutine("SpawnGolem");
 		}
 	}
-	private IEnumerator ActivateTriggers() {
+
+	private IEnumerator activateTriggers() {
 		yield return new WaitForSeconds(.3f);
 		fireRingTriggers.SetActive(true);
 	}
 
-	private IEnumerator SpawnGolem() {
-		yield return new WaitForSeconds(1);
-
-		golemController.gameObject.SetActive(true);
-	}
+	private void spawnGolem() => golemController.gameObject.SetActive(true);
 }

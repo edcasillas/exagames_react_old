@@ -1,8 +1,8 @@
-﻿using Audio.Configurations;
+﻿using Audio;
+using Audio.Configuration;
 using RootMotion.Demos;
 using RootMotion.FinalIK;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityStandardAssets.Cameras;
 
 [RequireComponent(typeof(HealthBarController))]
@@ -66,7 +66,7 @@ public class PlayerController : CharacterThirdPerson {
 			rigidbody.angularVelocity = Vector3.zero;
 			animator.SetTrigger(AnimatorTriggers.Death.ToString());
 			gameoverCanvas.SetActive(true);
-			SoundManager.Instance.PlaySingleClip(MusicClipName.PlayerLoses);
+			GameManager.Instance.SetPlayerDead();
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 			freeLookCam.enabled = false;

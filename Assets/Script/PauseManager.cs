@@ -1,30 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Audio.Configurations;
+﻿using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseManager : MonoBehaviour
+public class PauseManager : MonoBehaviour 
 {
 	public static PauseManager instance;
 	private bool _isInPause = false;
-	public bool IsInPause 
-	{
-		get 
-		{
-			return _isInPause;
-		}
-		set 
-		{
+
+	public bool IsInPause {
+		get { return _isInPause; }
+		set {
 			_isInPause = value;
-			if (_isInPause) 
-			{
+			if (_isInPause) {
 				pauseMenu.SetActive(true);
 				Cursor.lockState = CursorLockMode.None;
 				Cursor.visible = true;
 				Time.timeScale = 0;
-			} else 
-			{
+			} else {
 				pauseMenu.SetActive(false);
 				Cursor.lockState = CursorLockMode.Locked;
 				Cursor.visible = false;
@@ -33,41 +25,32 @@ public class PauseManager : MonoBehaviour
 		}
 	}
 
-	[SerializeField]
-	private GameObject pauseMenu;
+	[SerializeField] private GameObject pauseMenu;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        if(instance) 
-		{
+	// Start is called before the first frame update
+	void Awake() {
+		if (instance) {
 			Destroy(this);
-		} else 
-		{
+		} else {
 			instance = this;
 		}
-    }
+	}
 
 	private void Start() {
 		IsInPause = false;
 	}
 
-	private void Update() 
-	{
-		if(Input.GetKeyDown(KeyCode.Escape)) 
-		{
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.Escape)) {
 			IsInPause = !IsInPause;
 		}
 	}
 
-	public void ResumeGame() 
-	{
+	public void ResumeGame() {
 		IsInPause = false;
 	}
 
-	public void GoToMainMenu() 
-	{
-		SceneManager.LoadScene("MainMenu");
-		SoundManager.Instance.PlayLoopClip(MusicClipName.MainMenu, true);
+	public void GoToMainMenu() {
+		ScenesManager.Instance.ChangeScene(Scenes.MainMenu.ToString());
 	}
 }
