@@ -2209,7 +2209,7 @@ MonoBehaviour:
   isAiming: 0
   gameoverCanvas: {fileID: 0}
   freeLookCam: {fileID: 0}
-  InitialHealth: 2147483647
+  InitialHealth: 100
 --- !u!114 &5162836200579285038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8384,7 +8384,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5162836201704572503}
-  m_LocalRotation: {x: -0, y: -0.9992059, z: -0, w: 0.03984454}
+  m_LocalRotation: {x: 0, y: -0.9992059, z: 0, w: 0.039844017}
   m_LocalPosition: {x: 53.037, y: 19.996338, z: 82.241}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

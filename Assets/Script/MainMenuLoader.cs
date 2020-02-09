@@ -9,6 +9,7 @@ public class MainMenuLoader : MonoBehaviour {
 	private AsyncOperation asyncLoad;
 
 	private IEnumerator Start() {
+
 		asyncLoad = SceneManager.LoadSceneAsync(Scenes.MainMenu.ToString());
 		asyncLoad.allowSceneActivation = false;
 
@@ -16,7 +17,7 @@ public class MainMenuLoader : MonoBehaviour {
 
 		videoPlayer.Play();
 		yield return new WaitForSecondsRealtime((float)videoPlayer.clip.length);
-		
+
 		asyncLoad.allowSceneActivation = true;
 
 		// Wait until the asynchronous scene fully loads

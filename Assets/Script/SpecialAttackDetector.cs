@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Golems;
 using UnityEngine;
 
 public class SpecialAttackDetector : MonoBehaviour
