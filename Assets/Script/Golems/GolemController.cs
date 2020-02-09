@@ -18,9 +18,8 @@ public abstract class GolemController : MonoBehaviour
 	protected bool canAttack = true;
 	[SerializeField]
 	protected bool takingDamage = false;
-	protected bool specialAttackTriggered;
+	protected bool isSpecialAttackTriggered = false;
 
-	protected bool isChasing = false;
 	protected bool IsChasing => Vector3.Distance(player.transform.position, transform.position) < maxChasingRange;
 
 	protected HealthBarController healthBarController;
@@ -81,6 +80,9 @@ public abstract class GolemController : MonoBehaviour
 	[SerializeField]
 	protected GolemStates actualState = GolemStates.Idle;
 
+	//private bool isInChasingRange = false;
+	public bool IsInAttackRange => Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance;
+
 	protected virtual void Awake()
     {
 		healthBarController = GetComponent<HealthBarController>();
@@ -95,16 +97,13 @@ public abstract class GolemController : MonoBehaviour
 		if (!isDead) {
 			if (player.Health > 0)
 			{
-				if (Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance && canAttack && (actualState == GolemStates.Idle || actualState == GolemStates.Walking))
+				if (IsInAttackRange && canAttack && (actualState == GolemStates.Idle || actualState == GolemStates.Walking) && !takingDamage)
 				{
-					if (specialAttackTriggered && canAttack)
-					{
-						TriggerSpecialAttack();
-					} else if (canAttack) {
+					if (canAttack) {
 						if (Debug.isDebugBuild) Debug.Log("Attack");
 						Attack();
 					}
-				} else if (player.Health > 0 && IsChasing && Vector3.Distance(player.transform.position, transform.position) > maxCloseDistance && (!specialAttackTriggered || !canAttack) && (actualState == GolemStates.Idle || actualState == GolemStates.Walking) && !takingDamage) {
+				} else if (player.Health > 0 && IsChasing /*&& (!isSpecialAttackTriggered || !canAttack)*/ && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)/* && !takingDamage*/) {
 					Walk();
 				}
 			} else//When the player is dead
@@ -122,11 +121,6 @@ public abstract class GolemController : MonoBehaviour
 	}
 
 	private void OnEnable() => healthBarHudItem.SetActive(true);
-
-	//private bool IsChasing() 
-	//{
-	//	return Vector3.Distance(player.transform.position, transform.position) < maxChasingRange;
-	//}
 
 	public void SetPlayer(PlayerController _player) {
 		player = _player;
@@ -146,8 +140,13 @@ public abstract class GolemController : MonoBehaviour
 	/// <param name="_triggerName"></param>
 	protected void PlayAnimationWithTrigger(string _triggerName) 
 	{
+		if(_triggerName == SPECIAL_ATTACK_TRIGGER && (takingDamage && !canAttack))
+		{
+			isSpecialAttackTriggered = false;
+			return;
+		}
+
 		animator.SetTrigger(_triggerName);
-		//SetAnimationBool(WALKING_BOOL, false);
 		if (_triggerName == SPECIAL_ATTACK_TRIGGER) {
 			SetAnimationBool(WALKING_BOOL, false);
 		} else if (_triggerName == ATTACK_TRIGGER) {
@@ -179,9 +178,8 @@ public abstract class GolemController : MonoBehaviour
 	}
 
 	public void TakeDamage(int _damage) {
-		//Debug.Log("Taking damage");
 		if (!takingDamage) {
-			//Debug.LogWarning("Damage taked");
+			canAttack = false;
 			takingDamage = true;
 			StopAllCoroutines();
 			StartCoroutine(TakeDamageWithCoroutine(_damage));
@@ -195,19 +193,15 @@ public abstract class GolemController : MonoBehaviour
 			shield.SetActive(true);
 			ChangeState(GolemStates.TakingDamage);
 			Health -= _damage;
-			PlayAnimationWithTrigger(TAKE_DAMAGE_TRIGGER);
 			SetAnimationBool(WALKING_BOOL, false);
-			//Debug.Log("Playing take damage animation");
-			yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-			//Debug.Log("Finished take damage animation");
+			PlayAnimationWithTrigger(TAKE_DAMAGE_TRIGGER);
+			yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 			ChangeState(GolemStates.Idle);
-			canAttack = false;
 		}
 		yield return new WaitForSeconds(cooldownGetDamage);
-		//Debug.Log("Finished cooldown");
-		canAttack = true;
 		takingDamage = false;
 		shield.SetActive(false);
+		canAttack = true;
 	}
 
 	protected void Attack() {
@@ -226,9 +220,8 @@ public abstract class GolemController : MonoBehaviour
 		while (!animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
 		{
 			yield return null;
-			//Debug.Log("Starting selected animation state");
 		}
-		//Debug.Log("Checking animation name: " + _actualAnimationName);
+
 		while(animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
 		{
 			yield return null;
