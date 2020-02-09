@@ -14,21 +14,24 @@ namespace Sound {
 		private bool isFinished;
 		private Action onIntroFinished;
 
-		private void Awake() => audioSource = GetComponent<AudioSource>();
+		private void Awake() {
+			audioSource = GetComponent<AudioSource>();
+			GameManager.Instance.SetBossMusicController(this);
+		}
 
 		public void PlayIntroAndLoop(Action onIntroFinished) {
 			this.onIntroFinished = onIntroFinished;
 			StartCoroutine(playIntroAndLoop());
 		}
 
-		private void PlayDefeated() {
+		public void PlayDefeated() {
 			isFinished = true;
 			audioSource.clip = defeatedClip;
 			audioSource.loop = false;
 			audioSource.Play();
 		}
 
-		private void PlayVictory() {
+		public void PlayVictory() {
 			isFinished = true;
 			audioSource.clip = victoryClip;
 			audioSource.loop = false;
