@@ -277,10 +277,6 @@ PrefabInstance:
       propertyPath: freeLookCam
       value: 
       objectReference: {fileID: 1085618845}
-    - target: {fileID: 746117677, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
-      propertyPath: InitialHealth
-      value: 2147483647
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d7979b8117d04a6981e5d2ab5238bf1, type: 3}
 --- !u!114 &184086499 stripped
