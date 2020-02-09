@@ -4,7 +4,6 @@ using System;
 using UnityEngine;
 
 namespace Sound {
-	[RequireComponent(typeof(AudioSource))]
 	public class BossMusicController : MonoBehaviour {
 		private bool isStarted;
 		private bool isFinished;
