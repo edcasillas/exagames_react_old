@@ -8,7 +8,7 @@ namespace Sound {
 		private bool isStarted;
 		private bool isFinished;
 
-		private void Awake() => GameManager.Instance.SetBossMusicController(this);
+		private void Start() => GameManager.Instance.SetBossMusicController(this);
 
 		public void PlayIntroAndLoop(Action onIntroFinished = null) {
 			if (isStarted) return;

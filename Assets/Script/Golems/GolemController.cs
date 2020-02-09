@@ -18,9 +18,9 @@ namespace Golems {
 
 		protected bool canAttack = true;
 		[SerializeField] protected bool takingDamage = false;
-		protected bool specialAttackTriggered;
+		protected bool isSpecialAttackTriggered;
 
-	protected bool IsChasing => Vector3.Distance(player.transform.position, transform.position) < maxChasingRange;
+		protected bool IsChasing => Vector3.Distance(player.transform.position, transform.position) < maxChasingRange;
 
 		protected HealthBarController healthBarController;
 
@@ -80,50 +80,49 @@ namespace Golems {
 		[SerializeField] protected GolemStates lastState = GolemStates.Idle;
 		[SerializeField] protected GolemStates actualState = GolemStates.Idle;
 
-	//private bool isInChasingRange = false;
-	public bool IsInAttackRange => Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance;
+		//private bool isInChasingRange = false;
+		public bool IsInAttackRange =>
+			Vector3.Distance(player.transform.position, transform.position) < maxCloseDistance;
 
-	protected virtual void Awake()
-    {
-		healthBarController = GetComponent<HealthBarController>();
-		Health = maxLife;
-	}
+		protected virtual void Awake() {
+			healthBarController = GetComponent<HealthBarController>();
+			Health = maxLife;
+		}
 
 		protected virtual void Update() {
 			if (Health <= 0)
 				isDead = true;
 
-		if (!isDead) {
-			if (player.Health > 0)
-			{
-				if (IsInAttackRange && canAttack && (actualState == GolemStates.Idle || actualState == GolemStates.Walking) && !takingDamage)
-				{
-					if (canAttack) {
-						if (Debug.isDebugBuild) Debug.Log("Attack");
-						Attack();
+			if (!isDead) {
+				if (player.Health > 0) {
+					if (IsInAttackRange && canAttack &&
+					    (actualState == GolemStates.Idle || actualState == GolemStates.Walking) && !takingDamage) {
+						if (canAttack) {
+							if (Debug.isDebugBuild) Debug.Log("Attack");
+							Attack();
+						}
+					} else if (player.Health > 0 && IsChasing /*&& (!isSpecialAttackTriggered || !canAttack)*/ &&
+					           (actualState == GolemStates.Idle ||
+					            actualState == GolemStates.Walking) /* && !takingDamage*/) {
+						Walk();
 					}
-				} else if (player.Health > 0 && IsChasing /*&& (!isSpecialAttackTriggered || !canAttack)*/ && (actualState == GolemStates.Idle || actualState == GolemStates.Walking)/* && !takingDamage*/) {
-					Walk();
+				} else //When the player is dead
+				{
+					ChangeState(GolemStates.Idle);
+					SetAnimationBool(WALKING_BOOL, false);
 				}
-			} else//When the player is dead
-			{
-				ChangeState(GolemStates.Idle);
-				SetAnimationBool(WALKING_BOOL, false);
-			}
-		} else 
-		{
-			if(!animDeadPlayed) 
-			{
-				Die();
+			} else {
+				if (!animDeadPlayed) {
+					Die();
+				}
 			}
 		}
-	}
 
 		private void OnEnable() => healthBarHudItem.SetActive(true);
 
-	public void SetPlayer(PlayerController _player) {
-		player = _player;
-	}
+		public void SetPlayer(PlayerController _player) {
+			player = _player;
+		}
 
 		protected void ChangeState(GolemStates _newState) {
 			lastState = actualState;
@@ -132,27 +131,25 @@ namespace Golems {
 
 		public abstract void TriggerSpecialAttack(); //Esto lo debe de desarrolar el golem hijo de esta clase
 
-	/// <summary>
-	/// Used to play animations with a animator trigger
-	/// </summary>
-	/// <param name="_triggerName"></param>
-	protected void PlayAnimationWithTrigger(string _triggerName) 
-	{
-		if(_triggerName == SPECIAL_ATTACK_TRIGGER && (takingDamage && !canAttack))
-		{
-			isSpecialAttackTriggered = false;
-			return;
-		}
+		/// <summary>
+		/// Used to play animations with a animator trigger
+		/// </summary>
+		/// <param name="_triggerName"></param>
+		protected void PlayAnimationWithTrigger(string _triggerName) {
+			if (_triggerName == SPECIAL_ATTACK_TRIGGER && (takingDamage && !canAttack)) {
+				isSpecialAttackTriggered = false;
+				return;
+			}
 
-		animator.SetTrigger(_triggerName);
-		if (_triggerName == SPECIAL_ATTACK_TRIGGER) {
-			SetAnimationBool(WALKING_BOOL, false);
-		} else if (_triggerName == ATTACK_TRIGGER) {
-			SetAnimationBool(WALKING_BOOL, false);
-		} else if (_triggerName == DEATH_TRIGGER) {
-			SetAnimationBool(WALKING_BOOL, false);
+			animator.SetTrigger(_triggerName);
+			if (_triggerName == SPECIAL_ATTACK_TRIGGER) {
+				SetAnimationBool(WALKING_BOOL, false);
+			} else if (_triggerName == ATTACK_TRIGGER) {
+				SetAnimationBool(WALKING_BOOL, false);
+			} else if (_triggerName == DEATH_TRIGGER) {
+				SetAnimationBool(WALKING_BOOL, false);
+			}
 		}
-	}
 
 		/// <summary>
 		/// Used to play animations with a animator boolean
@@ -176,32 +173,32 @@ namespace Golems {
 			}
 		}
 
-	public void TakeDamage(int _damage) {
-		if (!takingDamage) {
-			canAttack = false;
-			takingDamage = true;
-			StopAllCoroutines();
-			StartCoroutine(TakeDamageWithCoroutine(_damage));
-		}
-		
-	}
+		public void TakeDamage(int _damage) {
+			if (!takingDamage) {
+				canAttack = false;
+				takingDamage = true;
+				StopAllCoroutines();
+				StartCoroutine(TakeDamageWithCoroutine(_damage));
+			}
 
-	protected IEnumerator TakeDamageWithCoroutine(int _damage) {
-		if (!isDead) 
-		{
-			shield.SetActive(true);
-			ChangeState(GolemStates.TakingDamage);
-			Health -= _damage;
-			SetAnimationBool(WALKING_BOOL, false);
-			PlayAnimationWithTrigger(TAKE_DAMAGE_TRIGGER);
-			yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-			ChangeState(GolemStates.Idle);
 		}
-		yield return new WaitForSeconds(cooldownGetDamage);
-		takingDamage = false;
-		shield.SetActive(false);
-		canAttack = true;
-	}
+
+		protected IEnumerator TakeDamageWithCoroutine(int _damage) {
+			if (!isDead) {
+				shield.SetActive(true);
+				ChangeState(GolemStates.TakingDamage);
+				Health -= _damage;
+				SetAnimationBool(WALKING_BOOL, false);
+				PlayAnimationWithTrigger(TAKE_DAMAGE_TRIGGER);
+				yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+				ChangeState(GolemStates.Idle);
+			}
+
+			yield return new WaitForSeconds(cooldownGetDamage);
+			takingDamage = false;
+			shield.SetActive(false);
+			canAttack = true;
+		}
 
 		protected void Attack() {
 			if (!takingDamage) {
@@ -213,31 +210,29 @@ namespace Golems {
 			}
 		}
 
-	protected IEnumerator ChangeStateWhenAnimationIsOver(string _actualAnimationName, GolemStates _stateToChange) 
-	{
-		while (!animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
-		{
-			yield return null;
-		}
+		protected IEnumerator ChangeStateWhenAnimationIsOver(string _actualAnimationName, GolemStates _stateToChange) {
+			while (!animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) {
+				yield return null;
+			}
 
-		while(animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) 
-		{
-			yield return null;
+			while (animator.GetCurrentAnimatorStateInfo(0).IsName(_actualAnimationName)) {
+				yield return null;
+			}
+
+			ChangeState(_stateToChange);
 		}
-		ChangeState(_stateToChange);
-	}
 
 		protected IEnumerator CooldownAttack() {
 			yield return new WaitForSeconds(attackCooldownTime);
 			canAttack = true;
 		}
 
-	protected void Die() 
-	{
-		collision.enabled = false;
-		PlayAnimationWithTrigger(DEATH_TRIGGER);
-		winCanvas.SetActive(true);
-		animDeadPlayed = true;
-		GameManager.Instance.SetPlayerVictory();
+		protected void Die() {
+			collision.enabled = false;
+			PlayAnimationWithTrigger(DEATH_TRIGGER);
+			winCanvas.SetActive(true);
+			animDeadPlayed = true;
+			GameManager.Instance.SetPlayerVictory();
+		}
 	}
 }

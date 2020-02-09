@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class GolemCollider : MonoBehaviour {
-	public GolemController Golem;
+	public Golems.GolemController Golem;
 
 	private void OnParticleCollision(GameObject other)
 	{
