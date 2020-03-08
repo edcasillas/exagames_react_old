@@ -308,6 +308,11 @@ PrefabInstance:
       propertyPath: collision
       value: 
       objectReference: {fileID: 754641468}
+    - target: {fileID: 7623049499512972670, guid: 8b5a584e0214d6541925238e05b4c73e,
+        type: 3}
+      propertyPath: takingDamage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1341547522, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1962,6 +1967,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 5162836201056223444, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
+        type: 3}
+      propertyPath: gameoverCanvas
+      value: 
+      objectReference: {fileID: 1731749347}
+    - target: {fileID: 5162836201056223444, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
+        type: 3}
+      propertyPath: freeLookCam
+      value: 
+      objectReference: {fileID: 1085618845}
     - target: {fileID: 5162836201704572502, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2017,16 +2032,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5162836201056223444, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
-        type: 3}
-      propertyPath: gameoverCanvas
-      value: 
-      objectReference: {fileID: 1731749347}
-    - target: {fileID: 5162836201056223444, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
-        type: 3}
-      propertyPath: freeLookCam
-      value: 
-      objectReference: {fileID: 1085618845}
     - target: {fileID: 5162836200579285038, guid: 9d7979b8117d04a6981e5d2ab5238bf1,
         type: 3}
       propertyPath: Health_FillImage
