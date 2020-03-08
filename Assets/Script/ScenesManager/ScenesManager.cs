@@ -18,6 +18,8 @@ public class ScenesManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 
+	public void ChangeScene(Scene _scene) => ChangeScene(_scene.name);
+
 	public void ChangeScene(string scene) 
 	{
 		SceneManager.LoadSceneAsync(scene);

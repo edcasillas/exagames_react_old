@@ -125,7 +125,9 @@ public class PlayerController : CharacterThirdPerson {
 
 	private void CheckIfShouldReceiveDamage(GameObject collider) {
 		var col = collider.GetComponent<PlayerDamagerObject>();
-		if (col)
+		if (col) {
+			if ((bool) col.GetGolemController()?.IsInnoffensiveGolem()) return;
 			TakeDamage(col.DamageToProvoke);
+		}
 	}
 }

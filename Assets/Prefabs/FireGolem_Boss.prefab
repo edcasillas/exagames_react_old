@@ -4858,7 +4858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &896748899757359891
 Transform:
   m_ObjectHideFlags: 0
@@ -4911,6 +4911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78fc94afec7db47d0ae3d376a4395020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInoffensiveGolem: 0
   animator: {fileID: 4467744649733995299}
   walkSpeed: 2
   maxCloseDistance: 2
@@ -4918,8 +4919,9 @@ MonoBehaviour:
   attackCooldownTime: 2
   healthBarHudItem: {fileID: 0}
   winCanvas: {fileID: 0}
+  takingDamage: 0
   player: {fileID: 0}
-  collision: {fileID: 4562869442878133323}
+  collision: {fileID: 754641468}
   shield: {fileID: 8313460480483777337}
   maxLife: 200
   damage: 20
@@ -4986,6 +4988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29135d59b219047f59231e1528f8ff61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  golemController: {fileID: 7623049499512972670}
   DamageToProvoke: 20
 --- !u!1 &4562869439682085775
 GameObject:
@@ -5589,11 +5592,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4566414629967094601}
   - component: {fileID: 4467744649733995299}
-  - component: {fileID: 4562869442878133323}
   - component: {fileID: 4390843293804131256}
   - component: {fileID: 7848216531280319728}
   - component: {fileID: 7810455612693258276}
   - component: {fileID: 178005179500330516}
+  - component: {fileID: 754641468}
   m_Layer: 0
   m_Name: FireGolem_Boss
   m_TagString: Untagged
@@ -5639,19 +5642,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &4562869442878133323
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4562869442878133321}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.4067016, z: 1.359667}
-  m_Center: {x: 1.279033e-18, y: 1.2068846, z: -0.003996253}
 --- !u!114 &4390843293804131256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5677,6 +5667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29135d59b219047f59231e1528f8ff61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  golemController: {fileID: 7623049499512972670}
   DamageToProvoke: 10
 --- !u!82 &7810455612693258276
 AudioSource:
@@ -5795,6 +5786,19 @@ MonoBehaviour:
   golemMeleeAttack: {fileID: 8300000, guid: 6bd363ce888fc184ba77121bee1142bb, type: 3}
   golemDeath: {fileID: 8300000, guid: b5af3545fd8cb7748a82293a3b336ee8, type: 3}
   golemFireball: {fileID: 8300000, guid: 53bf9d94b3ed3df48979593851b2df06, type: 3}
+--- !u!65 &754641468
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4562869442878133321}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.5038948, z: 1}
+  m_Center: {x: 0, y: 1.2140408, z: 0}
 --- !u!1 &4562869442883708517
 GameObject:
   m_ObjectHideFlags: 0
