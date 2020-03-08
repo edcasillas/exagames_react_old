@@ -307,10 +307,15 @@ PrefabInstance:
         type: 3}
       propertyPath: collision
       value: 
-      objectReference: {fileID: 754641468}
+      objectReference: {fileID: 0}
     - target: {fileID: 7623049499512972670, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
       propertyPath: InoffensiveGolem
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623049499512972670, guid: 8b5a584e0214d6541925238e05b4c73e,
+        type: 3}
+      propertyPath: IsInoffensiveGolem
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341547522, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
@@ -528,25 +533,6 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 3017061340477791053}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &754641467 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4562869442878133321, guid: 8b5a584e0214d6541925238e05b4c73e,
-    type: 3}
-  m_PrefabInstance: {fileID: 360738050}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &754641468
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754641467}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.5038948, z: 1}
-  m_Center: {x: 0, y: 1.2140408, z: 0}
 --- !u!1 &775411058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,6 +1759,11 @@ PrefabInstance:
       propertyPath: HudItem
       value: 
       objectReference: {fileID: 1529432192}
+    - target: {fileID: 8638969658920520361, guid: bc868a4623b2a9846915ac3e928902fc,
+        type: 3}
+      propertyPath: unlimitedAmmo
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3825314965437572647, guid: bc868a4623b2a9846915ac3e928902fc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
