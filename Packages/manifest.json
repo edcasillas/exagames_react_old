@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "com.ecasillas.commonutils": "https://github.com/edcasillas/unity-common-utils.git",
+    "com.ecasillas.missingrefsfinder": "https://github.com/edcasillas/unity-missing-references-finder.git",
+    "com.ecasillas.prefabreplacer": "https://github.com/edcasillas/unity-prefab-replacer.git",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.3.2",
     "com.unity.collab-proxy": "1.2.16",
@@ -39,5 +42,19 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.ecasillas.commonutils": {
+      "hash": "dc239bc354cd5480127be625217cf0b880f6bddb",
+      "revision": "HEAD"
+    },
+    "com.ecasillas.missingrefsfinder": {
+      "hash": "75b31cd46b9d664e09eb9c070fa83110b513d9e2",
+      "revision": "HEAD"
+    },
+    "com.ecasillas.prefabreplacer": {
+      "hash": "d764bdd51ecba183396b48a7b89e70f7ed2c540c",
+      "revision": "HEAD"
+    }
   }
 }
