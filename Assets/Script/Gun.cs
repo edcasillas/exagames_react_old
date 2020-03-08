@@ -13,7 +13,16 @@ public class Gun : MonoBehaviour {
 	[SerializeField] PlayerController playerController;
 
 	[Header("Sound Variables")]
-	[SerializeField] GunSounds gS;
+	[SerializeField]private GunSounds gS;
+
+	[Header("Debug-only utils")] [SerializeField]
+	private bool unlimitedAmmo;
+
+	private void Awake() {
+#if !UNITY_EDITOR
+		unlimitedAmmo = false;
+#endif
+	}
 
 	private void OnEnable() => HudItem.SetActive(true);
 
@@ -36,7 +45,7 @@ public class Gun : MonoBehaviour {
 			if(playerController) {
 
 				if (fire > 0f && playerController.isAiming) {
-					WaterLevel -= ConsumeSpeed * Time.deltaTime;
+					if(!unlimitedAmmo) WaterLevel -= ConsumeSpeed * Time.deltaTime;
 					if (WaterLevel > 0f) {
 						Particles.Play();
 						if(!gS.GetAudioSource().isPlaying && !gS.isPaused) {

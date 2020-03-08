@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GolemDamagerObject : MonoBehaviour
-{
+public class GolemDamagerObject : MonoBehaviour {
 	public int DamageToProvoke;
+
+	private void OnParticleCollision(GameObject other) {
+		Debug.Log($"Particles collided with {other.name}");
+	}
 }
