@@ -15,6 +15,8 @@ namespace Golems
 
 		public override void TriggerSpecialAttack()
 		{
+			if (IsInoffensiveGolem) return;
+
 			if (!isDead && canAttack && !takingDamage)
 			{
 				isSpecialAttackTriggered = true;

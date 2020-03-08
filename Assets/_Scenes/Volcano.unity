@@ -310,8 +310,8 @@ PrefabInstance:
       objectReference: {fileID: 754641468}
     - target: {fileID: 7623049499512972670, guid: 8b5a584e0214d6541925238e05b4c73e,
         type: 3}
-      propertyPath: takingDamage
-      value: 0
+      propertyPath: InoffensiveGolem
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1341547522, guid: 8b5a584e0214d6541925238e05b4c73e, type: 3}
       propertyPath: m_LocalPosition.z

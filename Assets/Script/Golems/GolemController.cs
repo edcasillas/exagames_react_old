@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Golems {
 	[RequireComponent(typeof(HealthBarController))]
 	public abstract class GolemController : MonoBehaviour {
+		[SerializeField] protected bool IsInoffensiveGolem = false;
 		[SerializeField] private Animator animator;
 		[SerializeField] private float walkSpeed;
 		[SerializeField] private float maxCloseDistance;
@@ -201,6 +202,7 @@ namespace Golems {
 		}
 
 		protected void Attack() {
+			if (IsInoffensiveGolem) return;
 			if (!takingDamage) {
 				canAttack = false;
 				ChangeState(GolemStates.Attacking);
@@ -225,6 +227,10 @@ namespace Golems {
 		protected IEnumerator CooldownAttack() {
 			yield return new WaitForSeconds(attackCooldownTime);
 			canAttack = true;
+		}
+
+		public bool IsInnoffensiveGolem() {
+			return IsInoffensiveGolem;
 		}
 
 		protected void Die() {
