@@ -8,6 +8,7 @@ namespace Golems {
 	[RequireComponent(typeof(HealthBarController))]
 	public abstract class GolemController : MonoBehaviour {
 		[SerializeField] protected bool IsInoffensiveGolem = false;
+		protected bool CanMove = true;
 		[SerializeField] private Animator animator;
 		[SerializeField] private float walkSpeed;
 		[SerializeField] private float maxCloseDistance;
@@ -91,6 +92,12 @@ namespace Golems {
 		}
 
 		protected virtual void Update() {
+			if(Debug.isDebugBuild) {
+				if(Input.GetKeyDown(KeyCode.M)) {
+					CanMove = !CanMove;
+				}
+			}
+
 			if (Health <= 0)
 				isDead = true;
 
@@ -162,6 +169,7 @@ namespace Golems {
 		}
 
 		public void Walk() {
+			if (!CanMove) return;
 			if (animator.GetCurrentAnimatorStateInfo(0).IsName(WALK_STATE_NAME) ||
 			    animator.GetCurrentAnimatorStateInfo(0).IsName(IDLE_STATE_NAME)) {
 				Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y,
